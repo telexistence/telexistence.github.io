@@ -37,6 +37,7 @@
         }
 
         window.onload = function(){
+return;
             var query = getQueryString();
             if(!query || !query['id']) var controller = new Controller.Controller("oculus");
             else var controller = new Controller.Controller(query['id']);
