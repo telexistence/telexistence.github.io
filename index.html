@@ -37,6 +37,7 @@
         }
 
         window.onload = function(){
+            return;
             var query = getQueryString();
             if(!query || !query['id']) var controller = new Controller.Controller("oculus");
             else var controller = new Controller.Controller(query['id']);
@@ -44,6 +45,12 @@
     </script>
 </head>
 <body>
+aaa
+<br>
+bbb
+<br>
+ccc
+
 <div id="comment" name="comment"></div>
 <video id="leftVideo" name="leftVideo" autoplay width="640" height="480" class="left"></video>
 <video id="rightVideo" name="rightVideo" autoplay width="640" heigh="480"></video>
