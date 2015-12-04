@@ -12,7 +12,8 @@
         body {  margin: 0em;  }
     </style>
 
-    <script src="dist/minify.js"></script>
+    <script src="./dist/minify.js "></script>
+
     <script type="text/javascript">
         localStorage.clear();
         function getQueryString() {
@@ -41,10 +42,8 @@
 
         window.onload = function(){
             var query = getQueryString();
-            if(!query || !query['id']) var controller = new Controller.Controller("oculus", false);
-            else var controller = new Controller.Controller(query['id'], false);
-
-            console.log("new version");
+            if(!query || !query['id']) var controller = new Controller.Controller("robot", true);
+            else var controller = new Controller.Controller(query['id'], true);
         };
     </script>
 </head>
