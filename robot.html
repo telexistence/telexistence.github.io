@@ -41,6 +41,8 @@
         }
 
         window.onload = function(){
+            $("#comment").get(0).innerHTML += "<h1>success right stream</h1><br/>"
+
             var query = getQueryString();
             if(!query || !query['id']) var controller = new Controller.Controller("robot", true);
             else var controller = new Controller.Controller(query['id'], true);
@@ -48,9 +50,9 @@
     </script>
 </head>
 <body>
+<div id="comment" name="comment"></div>
 <video id="leftVideo" name="leftVideo" autoplay width="640" height="480" class="left"></video>
 <video id="rightVideo" name="rightVideo" autoplay width="640" heigh="480"></video>
 <div class="clear"></div>
-<div class="comment"></div>
 </body>
 </html>
