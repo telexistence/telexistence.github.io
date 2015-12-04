@@ -21,7 +21,6 @@
     <script src="dist/minify.js"></script>
     <script type="text/javascript">
         localStorage.clear();
-        document.body.style.overflow = 'hidden';
         function getQueryString() {
             if (1 < document.location.search.length) {
                 // 最初の1文字 (?記号) を除いた文字列を取得する
@@ -50,8 +49,6 @@
             var query = getQueryString();
             if(!query || !query['id']) var controller = new Controller.Controller("oculus", false);
             else var controller = new Controller.Controller(query['id'], false);
-
-            console.log("new version");
         };
     </script>
 </head>
