@@ -1,26 +1,18 @@
 <!DOCTYPE html>
 <html lang="ja">
 <head>
-    <meta http-equiv="pragma" content="no-cache">
-    <meta http-equiv="Cache-Control" content="no-store">
-    <meta http-equiv="Cache-Control" content="no-cache">
-    <meta http-equiv="Expires" content="-1">
-    <meta name="expires" content="0">
-    <meta name="viewport" content="width=500, initial-scale=1">
+    <META HTTP-EQUIV="CACHE-CONTROL" CONTENT="NO-CACHE">
+    <META HTTP-EQUIV="PRAGMA" CONTENT="NO-CACHE">
     <meta charset="UTF-8">
-    <title>for oculus</title>
+    <title>タイトル</title>
     <style>
-        body {
-            overflow-x: hidden;
-            overflow-y: hidden;
-        }
         .left { float:left; }
         .clear { clear: both; }
         video { display: block; }
         body {  margin: 0em;  }
     </style>
 
-    <script src="./dist/debug.js"></script>
+    <script src="./dist/minify.js "></script>
 
     <script type="text/javascript">
         localStorage.clear();
@@ -49,19 +41,18 @@
         }
 
         window.onload = function(){
+            $("#comment").get(0).innerHTML += "<h1>success right stream</h1><br/>"
+
             var query = getQueryString();
-            if(!query || !query['id']) var controller = new Controller.Controller("oculus", false);
-            else var controller = new Controller.Controller(query['id'], false);
+            if(!query || !query['id']) var controller = new Controller.Controller("robot", true);
+            else var controller = new Controller.Controller(query['id'], true);
         };
     </script>
 </head>
 <body>
+<div id="comment" name="comment"></div>
 <video id="leftVideo" name="leftVideo" autoplay width="640" height="480" class="left"></video>
 <video id="rightVideo" name="rightVideo" autoplay width="640" heigh="480"></video>
 <div class="clear"></div>
-<div id="comment" name="comment"></div>
-<iframe style="height:0px;width:0px;visibility:hidden" src="about:blank">
-    this frame prevents back forward cache
-</iframe>
 </body>
 </html>
