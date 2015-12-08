@@ -24,7 +24,16 @@
 
     <script type="text/javascript">
         localStorage.clear();
+        sensorDevice = null;
 
+        callback = function(sensor){
+            sensorDevice = sensor;
+        };
+
+        SHADER_LOADER.load(function(data){
+            window.vs = data.myShader.vertex;
+            window.fs = data.myShader.fragment;
+        });
 
         function getQueryString() {
             if (1 < document.location.search.length) {
@@ -43,15 +52,12 @@
             return null;
         }
 
-        SHADER_LOADER.load(function(data){
-            window.vs = data.myShader.vertex;
-            window.fs = data.myShader.fragment;
-        });
+        var query = getQueryString();
+        if(!query || !query['id']) var controller = new Controller.Controller("oculus", false);
+        else var controller = new Controller.Controller(query['id'], false);
 
         window.onload = function(){
-            var query = getQueryString();
-            if(!query || !query['id']) var controller = new Controller.Controller("oculus", false);
-            else var controller = new Controller.Controller(query['id'], false);
+
 
             var stats;
             stats = new Stats();
