@@ -1,46 +1,107 @@
-<META HTTP-EQUIV="CACHE-CONTROL" CONTENT="NO-CACHE">
-<META HTTP-EQUIV="PRAGMA" CONTENT="NO-CACHE">
-<meta http-equiv="Expires" content="Thu, 01 Dec 1994 16:00:00 GMT">
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <META HTTP-EQUIV="CACHE-CONTROL" CONTENT="NO-CACHE">
+    <META HTTP-EQUIV="PRAGMA" CONTENT="NO-CACHE">
+    <meta http-equiv="Expires" content="Thu, 01 Dec 1994 16:00:00 GMT">
+    <meta name="viewport" content="width=500, initial-scale=1">
+    <meta charset="UTF-8">
+    <title>タイトル</title>
+    <style>
+        body {
+            overflow-x: hidden;
+            overflow-y: hidden;
+        }
+        .left { float:left; }
+        .clear { clear: both; }
+        video { display: block; }
+        body {  margin: 0em;  }
+    </style>
 
-<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+    <script src="bower_components/eventemitter2/lib/eventemitter2.js"></script>
+    <script src="bower_components/lodash/lodash.js"></script>
+    <script src="bower_components/offline/offline.js"></script>
+    <script src="bower_components/peer.io/dist/peer.io.js"></script>
+    <script src="bower_components/peerjs/peer.js"></script>
 
-<script type="text/javascript">
-    localStorage.clear();
+    <script type="text/javascript">
+        localStorage.clear();
+        navigator.getUserMedia = navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMedia;
 
-    function getChromeVersion () {
-        var raw = navigator.userAgent.match(/Chrom(e|ium)\/([0-9]+)\./);
-
-        return raw ? parseInt(raw[2], 10) : false;
-    }
-
-    navigator.getUserMedia = navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMedia;
-    function getMedia(callback){
-        navigator.getUserMedia({
-            audio: true,
-            video: true
-        }, function (stream) {
-            callback(stream);
-        }, function (err) {
-            console.log(err);
-        });
-    }
-
-    window.onload = function () {
-        getMedia(function(rightStream){
-            getMedia(function(leftStream){
-                var stream1 = new webkitMediaStream();
-                stream1.addTrack(leftStream.getVideoTracks()[0]);
-                var stream2 = new webkitMediaStream();
-                stream2.addTrack(rightStream.getVideoTracks()[0]);
-
-                $("#leftVideo").get(0).src = window.URL.createObjectURL(stream1);
-                $("#rightVideo").get(0).src = window.URL.createObjectURL(stream2);
-
+        function getMedia(callback){
+            navigator.getUserMedia({
+                audio: true,
+                video: true
+            }, function (stream) {
+                callback(stream);
+            }, function (err) {
+                console.log(err);
             });
-        });
-    };
-</script>
+        }
 
+        function initialize(stream){
+            var peer = new Peer("oculus", {
+                config: {"iceServers":[
+                    {"url": "stun:stun.skyway.io:3478"}
+                ]},
+                host: 'robo.paas.jp-e1.cloudn-service.com',
+                port: 443,
+                secure: true,
+                key: 'DEl4XWDPustUHICCl8cZ',
+                debug: 0});
+
+            var peerIo = new PeerIo.PeerIo(peer);
+            peerIo.addDefaultStream(stream); // for answer
+
+            peerIo.on(PeerIo.OnStartVideo, function(peerId, stream){
+                console.log("received video from " + peerId);
+                var streams = stream.getVideoTracks();
+                var leftStream = new webkitMediaStream();
+                leftStream.addTrack(streams[0]);
+                var rightStream = new webkitMediaStream();
+                rightStream.addTrack(streams[1]);
+                document.getElementsByName("leftVideo")[0].src = window.URL.createObjectURL(leftStream);
+                document.getElementsByName("rightVideo")[0].src = window.URL.createObjectURL(rightStream);
+            });
+
+            peerIo.on(PeerIo.OnStopVideo, function(peerId){
+                console.log("close video link with " + peerId)
+            });
+
+            peerIo.on(PeerIo.OnDataLinkUp, function(peerId){
+                console.log("establish data link with " + peerId);
+                setInterval(function(){
+                    peerIo.send(query['target'], "unicast");
+                }, 2000);
+
+                setInterval(function(){
+                    peerIo.broadcast("broadcast");
+                }, 4000);
+            });
+
+            peerIo.on(PeerIo.OnDataLinkDown, function(peerId){
+                console.log("close data link with " + peerId)
+            });
+
+            peerIo.on(PeerIo.OnRecvData, function(peerId, message){
+                console.log("received data from " + peerId);
+                console.log(message);
+            });
+
+            peerIo.addNeighbour("robot", PeerIo.NeighbourTypeEnum.data);
+            peerIo.addNeighbour("robot", PeerIo.NeighbourTypeEnum.video, stream);
+        }
+
+        window.onload = function () {
+            getMedia(initialize);
+        };
+    </script>
+</head>
+<body>
 <video id="leftVideo" name="leftVideo" autoplay width="640" height="480" class="left"></video>
 <video id="rightVideo" name="rightVideo" autoplay width="640" heigh="480"></video>
+<div class="clear"></div>
+<div id="comment" name="comment"></div>
 
+</body>
+</html>

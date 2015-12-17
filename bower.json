@@ -1,0 +1,21 @@
+{
+  "name": "telexistence.github.io",
+  "homepage": "https://github.com/telexistence/telexistence.github.io",
+  "authors": [
+    "Toshiya Nakakura <nakakura@me.com>"
+  ],
+  "description": "",
+  "main": "",
+  "moduleType": [],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "peer.io": "*"
+  }
+}
