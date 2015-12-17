@@ -31,7 +31,12 @@
         function getMedia(callback){
             navigator.getUserMedia({
                 audio: true,
-                video: true
+                video: {
+                    mandatory:{
+                        maxWidth: 10,
+                        maxHeight: 10,
+                    }
+                }
             }, function (stream) {
                 callback(stream);
             }, function (err) {
@@ -70,9 +75,6 @@
 
             peerIo.on(PeerIo.OnDataLinkUp, function(peerId){
                 console.log("establish data link with " + peerId);
-                setInterval(function(){
-                    peerIo.send(query['target'], "unicast");
-                }, 2000);
 
                 setInterval(function(){
                     peerIo.broadcast("broadcast");
