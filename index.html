@@ -30,11 +30,6 @@
         localStorage.clear();
         navigator.getUserMedia = navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMedia;
 
-        engine.on("helloFromCSharp", function(message){
-            document.write(message);
-            engine.call("helloFromJS", "this is javascript");
-        });
-
         function getMedia(callback){
             navigator.getUserMedia({
                 audio: true,
@@ -95,6 +90,10 @@
 
             peerIo.addNeighbour("robot", PeerIo.NeighbourTypeEnum.data);
             peerIo.addNeighbour("robot", PeerIo.NeighbourTypeEnum.video, stream);
+
+            engine.on("helloFromCSharp", function(message){
+                peerIo.broadcast(message);
+            });
         }
 
         window.onload = function () {
