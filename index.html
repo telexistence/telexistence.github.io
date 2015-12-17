@@ -31,12 +31,7 @@
         function getMedia(callback){
             navigator.getUserMedia({
                 audio: true,
-                video: {
-                    mandatory:{
-                        width: 10,
-                        height: 10,
-                    }
-                }
+                video: false
             }, function (stream) {
                 callback(stream);
             }, function (err) {
