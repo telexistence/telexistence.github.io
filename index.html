@@ -77,6 +77,9 @@
 
             peerIo.on(PeerIo.OnDataLinkUp, function(peerId){
                 console.log("establish data link with " + peerId);
+
+                peerIo.broadcast('<User Message="CameraParameters" />');
+                peerIo.broadcast('<User M />');
             });
 
             peerIo.on(PeerIo.OnDataLinkDown, function(peerId){
@@ -85,7 +88,8 @@
 
             peerIo.on(PeerIo.OnRecvData, function(peerId, message){
                 console.log("received data from " + peerId);
-                console.log(message);
+                engine.call('helloFromJS', message).then(function() {
+                });
             });
 
             peerIo.addNeighbour("robot", PeerIo.NeighbourTypeEnum.data);
