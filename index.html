@@ -79,9 +79,6 @@
                 console.log("establish data link with " + peerId);
                 engine.call('onOpen').then(function() {
                 });
-
-                peerIo.broadcast('<User Message="CameraParameters" />');
-                peerIo.broadcast('<User M />');
             });
 
             peerIo.on(PeerIo.OnDataLinkDown, function(peerId){
