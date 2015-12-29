@@ -67,8 +67,11 @@
                     console.log("close video link with " + peerId)
                 });
 
-                peerIo.on(PeerIo.OnDataLinkUp, function(peerId){
+                peerIo.on(PeerIo.OnDataLinkUp, function(peerId, option){
                     console.log("establish data link with " + peerId);
+                    console.log("this link option is as follows");
+                    console.log(option);
+
                     setInterval(function(){
                         peerIo.send(query['target'], "unicast");
                     }, 2000);
@@ -87,9 +90,17 @@
                     console.log(message);
                 });
 
-                peerIo.addNeighbour(query['target'], PeerIo.NeighbourTypeEnum.data);
-                peerIo.addNeighbour(query['target'], PeerIo.NeighbourTypeEnum.video, stream);
-                //peerIo.removeNeighbour(query['target'], PeerIo.NeighbourTypeEnum.data);
+                peerIo.addVideoNeighbour(query['target'], stream); //stream is optional parameter
+                peerIo.addDataNeighbour(query['target'], PeerIo.NeighbourTypeEnum.video,
+                        {
+                            label: 'json',
+                            serialization: 'none',
+                            reliable: false
+                        } //optional
+                );
+
+                //peerIo.removeVideoNeighbour(query['target']);
+                //peerIo.removeDataNeighbour(query['target']);
             }
 
             getMedia(function(stream){
