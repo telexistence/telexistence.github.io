@@ -105,13 +105,6 @@
 
             peerIo.on(PeerIo.OnDataLinkUp, function(peerId){
                 console.log("establish data link with " + peerId);
-
-                var request = {
-                    type: "callbackRequest",
-                    peerId: query['id']
-                };
-                peerIo.send(query['target'], JSON.stringify(request));
-
                 engine.call('onOpen').then(function() {
                 });
             });
@@ -126,6 +119,7 @@
                 });
             });
 
+            peerIo.addVideoNeighbour(query['target'], stream);
             peerIo.addDataNeighbour(query['target']);
 
             engine.on("send", function(message){
