@@ -16,6 +16,6 @@
     "tests"
   ],
   "dependencies": {
-    "peer.io": "~0.1.2"
+    "peer.io": "~0.1.3"
   }
 }
