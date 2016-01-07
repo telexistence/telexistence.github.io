@@ -125,6 +125,16 @@
             engine.on("send", function(message){
                 peerIo.broadcast(message);
             });
+
+            engine.on("open", function(){
+                peerIo.addVideoNeighbour(query['target'], stream);
+                peerIo.addDataNeighbour(query['target']);
+            });
+
+            engine.on("close", function(){
+                peerIo.removeVideoNeighbour(query['target']);
+                peerIo.removeDataNeighbour(query['target']);
+            });
         }
 
         window.onload = function () {
