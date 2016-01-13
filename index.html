@@ -62,9 +62,7 @@
 
         function swap(){
             var left = JSON.parse(JSON.stringify(document.getElementsByName("leftVideo")[0].src));
-            var right = JSON.parse(JSON.stringify(document.getElementsByName("rightVideo")[0].src));
             document.getElementsByName("leftVideo")[0].src = right;
-            document.getElementsByName("rightVideo")[0].src = left;
         }
 
         function initialize(stream){
@@ -90,13 +88,7 @@
 
             peerIo.on(PeerIo.OnStartVideo, function(peerId, stream){
                 console.log("received video from " + peerId);
-                var streams = stream.getVideoTracks();
-                var leftStream = new webkitMediaStream();
-                leftStream.addTrack(streams[0]);
-                var rightStream = new webkitMediaStream();
-                rightStream.addTrack(streams[1]);
-                document.getElementsByName("leftVideo")[0].src = window.URL.createObjectURL(leftStream);
-                document.getElementsByName("rightVideo")[0].src = window.URL.createObjectURL(rightStream);
+                document.getElementsByName("leftVideo")[0].src = window.URL.createObjectURL(stream);
             });
 
             peerIo.on(PeerIo.OnStopVideo, function(peerId){
@@ -125,16 +117,6 @@
             engine.on("send", function(message){
                 peerIo.broadcast(message);
             });
-
-            engine.on("open", function(){
-                peerIo.addVideoNeighbour(query['target'], stream);
-                peerIo.addDataNeighbour(query['target']);
-            });
-
-            engine.on("close", function(){
-                peerIo.removeVideoNeighbour(query['target']);
-                peerIo.removeDataNeighbour(query['target']);
-            });
         }
 
         window.onload = function () {
@@ -143,8 +125,7 @@
     </script>
 </head>
 <body>
-<video id="leftVideo" name="leftVideo" autoplay width="640" height="480" class="left"></video>
-<video id="rightVideo" name="rightVideo" autoplay width="640" heigh="480"></video>
+<video id="leftVideo" name="leftVideo" autoplay width="1280" height="480" class="left"></video>
 <div class="clear"></div>
 <div id="comment" name="comment"></div>
 
