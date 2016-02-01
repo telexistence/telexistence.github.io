@@ -18,6 +18,7 @@ gulp.task('usemin', function() {
     return gulp.src('src/*.html')
         .pipe(usemin({
             js: [ uglify(), rev() ],
+            js_mute: [ uglify(), rev() ],
             inlinejs: [ uglify() ]
         }))
         .pipe(gulp.dest('./'));
