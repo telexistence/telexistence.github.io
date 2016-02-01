@@ -1,0 +1,21 @@
+
+<META HTTP-EQUIV="CACHE-CONTROL" CONTENT="NO-CACHE">
+<META HTTP-EQUIV="PRAGMA" CONTENT="NO-CACHE">
+<meta http-equiv="Expires" content="Thu, 01 Dec 1994 16:00:00 GMT">
+<meta name="viewport" content="width=500, initial-scale=1">
+<meta charset="UTF-8">
+
+<script type="text/javascript">
+    navigator.getUserMedia = navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMedia;
+
+    window.onload = function(){
+        navigator.getUserMedia({
+            audio: true,
+            video: false
+        }, function (stream) {
+            document.write("stream");
+        }, function (err) {
+            console.log(err);
+        });
+    };
+</script>

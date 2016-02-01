@@ -15,7 +15,7 @@ gulp.task('bower', function() {
 });
 
 gulp.task('usemin', function() {
-    return gulp.src('src/index.html')
+    return gulp.src('src/*.html')
         .pipe(usemin({
             js: [ uglify(), rev() ],
             inlinejs: [ uglify() ]
