@@ -19,6 +19,8 @@ gulp.task('usemin', function() {
         .pipe(usemin({
             js: [ uglify(), rev() ],
             js_mute: [ uglify(), rev() ],
+            js_vp8: [ uglify(), rev() ],
+            js_vp9: [ uglify(), rev() ],
             inlinejs: [ uglify() ]
         }))
         .pipe(gulp.dest('./'));
