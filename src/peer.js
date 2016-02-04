@@ -1416,8 +1416,7 @@ Socket.prototype.send = function(data) {
   }
 
   var message = JSON.stringify(data);
-  var match = message.match(/VP8/);
-  if(match) console.log(message);
+  message = message.replace(/UDP\/TLS\/RTP/g, "RTP");
 
   if (this._wsOpen()) {
     this._socket.send(message);
