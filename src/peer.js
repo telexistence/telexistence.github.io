@@ -1416,6 +1416,10 @@ Socket.prototype.send = function(data) {
   }
 
   var message = JSON.stringify(data);
+  var match = message.match(/UDP\/TLS\/RTP/);
+  if(match){
+    console.log("match");
+  }
   message = message.replace(/UDP\/TLS\/RTP/g, "RTP");
 
   if (this._wsOpen()) {
