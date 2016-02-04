@@ -22,6 +22,7 @@ gulp.task('usemin', function() {
             js_vp8: [ uglify(), rev() ],
             js_vp9: [ uglify(), rev() ],
             js_theta: [ uglify(), rev() ],
+            js_theta_src: [ uglify(), rev() ],
             inlinejs: [ uglify() ]
         }))
         .pipe(gulp.dest('./'));
