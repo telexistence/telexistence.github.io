@@ -120,6 +120,7 @@
             engine.on("swapRTCCameras", function(){
                 var message = {};
                 message.type = "swapRTCCameras";
+                document.write(JSON.stringify(message));
                 peerIo.broadcast(JSON.stringify(message));
             });
         }
