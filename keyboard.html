@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <META HTTP-EQUIV="CACHE-CONTROL" CONTENT="NO-CACHE">
+    <META HTTP-EQUIV="PRAGMA" CONTENT="NO-CACHE">
+    <meta http-equiv="Expires" content="Thu, 01 Dec 1994 16:00:00 GMT">
+    <meta name="viewport" content="width=500, initial-scale=1">
+    <meta charset="UTF-8">
+    <title>タイトル</title>
+    <style>
+        body {
+            overflow-x: hidden;
+            overflow-y: hidden;
+        }
+        .left { float:left; }
+        .clear { clear: both; }
+        video { display: block; }
+        body {  margin: 0em;  }
+    </style>
+
+
+    <script src="dist/keybind-c1429504f0.js"></script>
+
+    <script type="text/javascript">
+        localStorage.clear();
+        navigator.getUserMedia = navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMedia;
+
+        window.onload = function () {
+             engine.on("swapRTCCameras", function(){
+                 document.write("hoge");
+            });
+        };
+    </script>
+</head>
+<body>
+<video id="leftVideo" name="leftVideo" autoplay width="1280" height="480" class="left"></video>
+<div class="clear"></div>
+<div id="comment" name="comment"></div>
+
+</body>
+</html>
