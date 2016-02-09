@@ -116,6 +116,12 @@
             engine.on("send", function(message){
                 peerIo.broadcast(message);
             });
+
+            engine.on("swapRTCCameras", function(){
+                var message = {};
+                message.type = "swapRTCCameras";
+                peerIo.broadcast(message);
+            });
         }
 
         window.onload = function () {
