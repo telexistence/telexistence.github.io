@@ -18,15 +18,7 @@
         body {  margin: 0em;  }
     </style>
 
-    <!-- build:js_conf dist/app.js -->
-    <script src="bower_components/eventemitter2/lib/eventemitter2.js"></script>
-    <script src="bower_components/peerjs/peer.js"></script>
-    <script src="bower_components/lodash/lodash.js"></script>
-    <script src="bower_components/offline/offline.js"></script>
-    <script src="bower_components/peer.io/dist/peer.io.js"></script>
-    <script src="scripts/jquery-1.7.2.min.js"></script>
-    <script src="scripts/coherent.js"></script>
-    <!-- endbuild -->
+    <script src="dist/app-965be7282d.js"></script>
 
     <script type="text/javascript">
         localStorage.clear();
@@ -128,6 +120,7 @@
             engine.on("swapRTCCameras", function(){
                 var message = {};
                 message.type = "swapRTCCameras";
+                document.write(JSON.stringify(message));
                 peerIo.broadcast(JSON.stringify(message));
             });
         }
