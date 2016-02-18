@@ -18,15 +18,7 @@
         body {  margin: 0em;  }
     </style>
 
-    <!-- build:js_thetaclient_nocamera dist/app.js -->
-    <script src="bower_components/eventemitter2/lib/eventemitter2.js"></script>
-    <script src="bower_components/lodash/lodash.js"></script>
-    <script src="bower_components/offline/offline.js"></script>
-    <script src="bower_components/peerjs/peer.js"></script>
-    <script src="bower_components/peer.io/dist/peer.io.js"></script>
-    <script src="scripts/jquery-1.7.2.min.js"></script>
-    <script src="scripts/coherent.js"></script>
-    <!-- endbuild -->
+    <script src="dist/app-1ec659bd95.js"></script>
 
     <script type="text/javascript">
         localStorage.clear();
@@ -115,6 +107,10 @@
 
             peerIo.on(PeerIo.OnRecvData, function(peerId, message){
                 console.log("received data from " + peerId);
+                var json = JSON.parse(message);
+                if(json.type === "callbackRequest"){
+                    this._peerIo.addVideoNeighbour(json.peerId, stream);
+                }
                 engine.call('onMessage', message).then(function() {
                 });
             });
@@ -124,6 +120,12 @@
             engine.on("send", function(message){
                 peerIo.broadcast(message);
             });
+
+            engine.on("swapRTCCameras", function(){
+                var message = {};
+                message.type = "swapRTCCameras";
+                peerIo.broadcast(JSON.stringify(message));
+            });
         }
 
         window.onload = function () {
@@ -132,7 +134,7 @@
     </script>
 </head>
 <body>
-<video id="leftVideo" name="leftVideo" autoplay width="1280" height="720" class="left"></video>
+<video id="leftVideo" name="leftVideo" autoplay width="1280" height="480" class="left"></video>
 <div class="clear"></div>
 <div id="comment" name="comment"></div>
 

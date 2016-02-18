@@ -18,9 +18,15 @@
         body {  margin: 0em;  }
     </style>
 
-    <script src="./src/peer.min.js"></script>
-
-    <script src="dist/app-3955ec2020.js"></script>
+    <!-- build:asics_theta dist/app.js -->
+    <script src="bower_components/eventemitter2/lib/eventemitter2.js"></script>
+    <script src="./peer.js"></script>
+    <script src="bower_components/lodash/lodash.js"></script>
+    <script src="bower_components/offline/offline.js"></script>
+    <script src="bower_components/peer.io/dist/peer.io.js"></script>
+    <script src="scripts/jquery-1.7.2.min.js"></script>
+    <script src="scripts/coherent.js"></script>
+    <!-- endbuild -->
 
     <script type="text/javascript">
         localStorage.clear();
@@ -93,11 +99,6 @@
 
             peerIo.on(PeerIo.OnDataLinkUp, function(peerId){
                 console.log("establish data link with " + peerId);
-                var message = {};
-                message.peerId = query['id'];
-                message.type = "callbackRequest";
-                console.log("send");
-                peerIo.send(peerId, JSON.stringify(message));
 
                 engine.call('onOpen').then(function() {
                 });
@@ -113,10 +114,14 @@
                 });
             });
 
-            peerIo.addDataNeighbour(query['target']);
-
             engine.on("send", function(message){
                 peerIo.broadcast(message);
+            });
+
+            engine.on("swapRTCCameras", function(){
+                var message = {};
+                message.type = "swapRTCCameras";
+                peerIo.broadcast(JSON.stringify(message));
             });
         }
 
@@ -126,7 +131,7 @@
     </script>
 </head>
 <body>
-<video id="leftVideo" name="leftVideo" autoplay width="1280" height="720" class="left"></video>
+<video id="leftVideo" name="leftVideo" autoplay width="1280" height="480" class="left"></video>
 <div class="clear"></div>
 <div id="comment" name="comment"></div>
 

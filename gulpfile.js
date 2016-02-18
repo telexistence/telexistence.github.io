@@ -23,11 +23,11 @@ gulp.task('usemin', function() {
             js_vp8: [ uglify(), rev() ],
             js_vp9: [ uglify(), rev() ],
             js_theta: [ uglify(), rev() ],
-            js_thetasrc_nocamera: [ uglify(), rev() ],
-            js_thetaclient_nocamera: [ uglify(), rev() ],
             js_theta_src: [ uglify(), rev() ],
             js_keybind: [ uglify(), rev() ],
             js_keybinds: [ uglify(), rev() ],
+            asics_client: [ uglify(), rev() ],
+            asics_theta: [ uglify(), rev() ],
             inlinejs: [ uglify() ]
         }))
         .pipe(gulp.dest('./'));
