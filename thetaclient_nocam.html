@@ -18,16 +18,7 @@
         body {  margin: 0em;  }
     </style>
 
-    <script src="./src/peer.min.js"></script>
-
-    <!-- build:js_thetasrc_nocamera dist/app.js -->
-    <script src="bower_components/eventemitter2/lib/eventemitter2.js"></script>
-    <script src="bower_components/lodash/lodash.js"></script>
-    <script src="bower_components/offline/offline.js"></script>
-    <script src="bower_components/peer.io/dist/peer.io.js"></script>
-    <script src="scripts/jquery-1.7.2.min.js"></script>
-    <script src="scripts/coherent.js"></script>
-    <!-- endbuild -->
+    <script src="dist/app-8d802568fd.js"></script>
 
     <script type="text/javascript">
         localStorage.clear();
@@ -55,13 +46,7 @@
         function getMedia(callback){
             navigator.getUserMedia({
                 audio: true,
-                video: {
-                    mandatory:{
-                        maxWidth: 1280,
-                        maxHeight: 720,
-                        maxFrameRate:15
-                    }
-                }
+                video: false
             }, function (stream) {
                 callback(stream);
             }, function (err) {
@@ -97,6 +82,7 @@
 
             peerIo.on(PeerIo.OnStartVideo, function(peerId, stream){
                 console.log("received video from " + peerId);
+                document.getElementsByName("leftVideo")[0].src = window.URL.createObjectURL(stream);
             });
 
             peerIo.on(PeerIo.OnStopVideo, function(peerId){
@@ -105,6 +91,12 @@
 
             peerIo.on(PeerIo.OnDataLinkUp, function(peerId){
                 console.log("establish data link with " + peerId);
+                var message = {};
+                message.peerId = query['id'];
+                message.type = "callbackRequest";
+                console.log("send");
+                peerIo.send(peerId, JSON.stringify(message));
+
                 engine.call('onOpen').then(function() {
                 });
             });
@@ -115,13 +107,11 @@
 
             peerIo.on(PeerIo.OnRecvData, function(peerId, message){
                 console.log("received data from " + peerId);
-                var json = JSON.parse(message);
-                if(json.type === "callbackRequest"){
-                    peerIo.addVideoNeighbour(json.peerId, stream);
-                }
                 engine.call('onMessage', message).then(function() {
                 });
             });
+
+            peerIo.addDataNeighbour(query['target']);
 
             engine.on("send", function(message){
                 peerIo.broadcast(message);
