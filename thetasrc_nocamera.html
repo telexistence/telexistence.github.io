@@ -90,7 +90,6 @@
 
             peerIo.on(PeerIo.OnStartVideo, function(peerId, stream){
                 console.log("received video from " + peerId);
-                document.getElementsByName("leftVideo")[0].src = window.URL.createObjectURL(stream);
             });
 
             peerIo.on(PeerIo.OnStopVideo, function(peerId){
