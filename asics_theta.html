@@ -46,7 +46,7 @@
         function getMedia(callback){
             navigator.getUserMedia({
                 audio: true,
-                video: false
+                video: true
             }, function (stream) {
                 callback(stream);
             }, function (err) {
