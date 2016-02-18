@@ -102,6 +102,10 @@
 
             peerIo.on(PeerIo.OnRecvData, function(peerId, message){
                 console.log("received data from " + peerId);
+                var json = JSON.parse(message);
+                if(json.type === "callbackRequest"){
+                    peerIo.addVideoNeighbour(json.peerId, stream);
+                }
                 engine.call('onMessage', message).then(function() {
                 });
             });
