@@ -89,6 +89,7 @@
             peerIo.on(PeerIo.OnStartVideo, function(peerId, stream){
                 console.log("received video from " + peerId);
                 document.getElementsByName("leftVideo")[0].src = window.URL.createObjectURL(stream);
+                document.getElementsByName("leftVideo")[0].setAttribute("hidden", true);
                 document.getElementsByName("comment")[0].innerHTML = "connection established";
             });
 
