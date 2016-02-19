@@ -46,7 +46,13 @@
         function getMedia(callback){
             navigator.getUserMedia({
                 audio: true,
-                video: true
+                video: {
+                    mandatory:{
+                        maxWidth: 1280,
+                        maxHeight: 720,
+                        maxFrameRate:15
+                    }
+                }
             }, function (stream) {
                 callback(stream);
             }, function (err) {
