@@ -1392,7 +1392,6 @@
         }
 
         var message = JSON.stringify(data).replace(/UDP\/TLS\/RTP/g, "RTP");
-        console.log(message);
         if (this._wsOpen()) {
             this._socket.send(message);
         } else {

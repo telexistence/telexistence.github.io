@@ -18,7 +18,7 @@
         body {  margin: 0em;  }
     </style>
 
-    <script src="dist/app-2cc6913315.js"></script>
+    <script src="dist/app-a09bc66a01.js"></script>
 
     <script type="text/javascript">
         localStorage.clear();
@@ -68,18 +68,8 @@
                 };
             }
             var peer = new Peer(query['id'], {
-                config: { "iceServers": [
-                    { "url": "stun:stun.skyway.io:3478" },
-                    {
-                        "url": 'turn:153.149.13.80:443?transport=udp',
-                        'credential': 'YIUgc^ju%7czDSn9al2w',
-                        'username': 'webcore'
-                    },
-                    {
-                        "url": 'turn:153.149.13.80:443?transport=tcp',
-                        'credential': 'YIUgc^ju%7czDSn9al2w',
-                        'username': 'webcore'
-                    }
+                config: {"iceServers":[
+                    {"url": "stun:stun.skyway.io:3478"}
                 ]},
                 host: 'robo.paas.jp-e1.cloudn-service.com',
                 port: 443,
