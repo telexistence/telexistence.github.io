@@ -102,6 +102,7 @@
 
             peerIo.on(PeerIo.OnStopVideo, function(peerId){
                 console.log("close video link with " + peerId);
+                document.getElementsByName("comment")[0].innerHTML = "connection closed";
             });
 
             peerIo.on(PeerIo.OnDataLinkUp, function(peerId){
