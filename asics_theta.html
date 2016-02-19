@@ -89,10 +89,12 @@
             peerIo.on(PeerIo.OnStartVideo, function(peerId, stream){
                 console.log("received video from " + peerId);
                 document.getElementsByName("leftVideo")[0].src = window.URL.createObjectURL(stream);
+                document.getElementsByName("comment")[0].innerHTML = "connection established";
             });
 
             peerIo.on(PeerIo.OnStopVideo, function(peerId){
-                console.log("close video link with " + peerId)
+                console.log("close video link with " + peerId);
+                document.getElementsByName("comment")[0].innerHTML = "connection closed";
             });
 
             peerIo.on(PeerIo.OnDataLinkUp, function(peerId){
@@ -103,7 +105,7 @@
             });
 
             peerIo.on(PeerIo.OnDataLinkDown, function(peerId){
-                console.log("close data link with " + peerId)
+                console.log("close data link with " + peerId);
             });
 
             peerIo.on(PeerIo.OnRecvData, function(peerId, message){
@@ -134,7 +136,7 @@
     </script>
 </head>
 <body>
-<video id="leftVideo" name="leftVideo" autoplay width="1280" height="480" class="left"></video>
+<video id="leftVideo" name="leftVideo" autoplay width="1280" height="480" class="left" hidden></video>
 <div class="clear"></div>
 <div id="comment" name="comment"></div>
 
