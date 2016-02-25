@@ -119,7 +119,10 @@
             });
 
             peerIo.on(PeerIo.OnRecvData, function(peerId, message){
-                console.log("received data from " + peerId);
+                if (message.indexOf('{') !== 0) {
+                    return;
+                }
+
                 var json = JSON.parse(message);
                 if(json.type === "callbackRequest"){
                     peerIo.removeVideoNeighbour(json.peerId);
