@@ -27,7 +27,9 @@ gulp.task('usemin', function() {
             js_keybind: [ uglify(), rev() ],
             js_keybinds: [ uglify(), rev() ],
             asics_client: [ uglify(), rev() ],
+            asics_client_auto: [ uglify(), rev() ],
             asics_theta: [ uglify(), rev() ],
+            asics_theta_auto: [ uglify(), rev() ],
             inlinejs: [ uglify() ]
         }))
         .pipe(gulp.dest('./'));
