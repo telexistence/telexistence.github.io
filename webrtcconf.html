@@ -114,7 +114,10 @@
             peerIo.addDataNeighbour(query['target']);
 
             engine.on("send", function(message){
-                peerIo.broadcast(message);
+                var json = {};
+                json.type = 'robotControl';
+                json.message = message;
+                peerIo.broadcast(JSON.stringify(json));
             });
 
             engine.on("swapRTCCameras", function(){
