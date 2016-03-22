@@ -73,7 +73,9 @@
                     target: "robot"
                 };
             }
-            var peer = new Peer(query['id'], {
+
+            var peerId = query['prefix'] +  new Date().getTime();
+            var peer = new Peer(peerId, {
                 config: {"iceServers":[
                     { "url": "stun:stun.skyway.io:3478" },
                     {
@@ -92,7 +94,7 @@
                 secure: true,
                 key: 'DEl4XWDPustUHICCl8cZ',
                 debug: 0});
-
+            console.log(peer.id);
             var peerIo = new PeerIo.PeerIo(peer);
             peerIo.addDefaultStream(stream); // for answer
 
@@ -119,7 +121,6 @@
             });
 
             peerIo.on(PeerIo.OnRecvData, function(peerId, message){
-                console.log(message);
                 if (message.indexOf('{') !== 0) {
                     return;
                 }
