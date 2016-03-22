@@ -129,6 +129,7 @@
             });
 
             peerIo.on(PeerIo.OnRecvData, function(peerId, message){
+                console.log(message);
                 if (message.indexOf('{') !== 0) {
                     return;
                 }
