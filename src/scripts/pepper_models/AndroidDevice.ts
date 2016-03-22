@@ -2,7 +2,8 @@
 
 module TexCardBoard{
   export class AndroidDevice extends EventEmitter2{
-    static OnDeviceOrientation = 'onDeviceOrientation-Android';
+    static OnDeviceOrientation = "onDeviceOrientation-AndroidDevice.ts";
+
     constructor(){
       super();
       var setOrientationControls = (e) => {
@@ -14,10 +15,10 @@ module TexCardBoard{
         message.alpha = e.alpha;
         message.beta = e.beta;
         message.gamma = e.gamma;
-        this.emit('orientation', message);
+        this.emit(AndroidDevice.OnDeviceOrientation, message);
       };
 
-      window.addEventListener(AndroidDevice.OnDeviceOrientation, setOrientationControls, true);
+      window.addEventListener('deviceorientation', setOrientationControls, true);
     }
   }
 }

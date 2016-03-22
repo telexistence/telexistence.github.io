@@ -19,11 +19,11 @@ var TexCardBoard;
                 message.alpha = e.alpha;
                 message.beta = e.beta;
                 message.gamma = e.gamma;
-                _this.emit('orientation', message);
+                _this.emit(AndroidDevice.OnDeviceOrientation, message);
             };
-            window.addEventListener(AndroidDevice.OnDeviceOrientation, setOrientationControls, true);
+            window.addEventListener('deviceorientation', setOrientationControls, true);
         }
-        AndroidDevice.OnDeviceOrientation = 'onDeviceOrientation-Android';
+        AndroidDevice.OnDeviceOrientation = "onDeviceOrientation-AndroidDevice.ts";
         return AndroidDevice;
     })(EventEmitter2);
     TexCardBoard.AndroidDevice = AndroidDevice;
