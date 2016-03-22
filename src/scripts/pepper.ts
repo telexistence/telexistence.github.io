@@ -22,7 +22,6 @@ module TexCardBoard{
       this.network = new Network(peerId);
       this.android = new AndroidDevice();
       this.android.on(AndroidDevice.OnDeviceOrientation, (e)=>{
-        document.write(e.gamma);
         this.network.send(e);
       });
       this.network.on(Network.onVideo, (stream)=>{

@@ -19,7 +19,6 @@ var TexCardBoard;
             this.network = new TexCardBoard.Network(peerId);
             this.android = new TexCardBoard.AndroidDevice();
             this.android.on(TexCardBoard.AndroidDevice.OnDeviceOrientation, function (e) {
-                document.write(e.gamma);
                 _this.network.send(e);
             });
             this.network.on(TexCardBoard.Network.onVideo, function (stream) {
