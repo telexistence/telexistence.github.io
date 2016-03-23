@@ -12,6 +12,11 @@ var TexCardBoard;
         function Network(prefix) {
             var _this = this;
             _super.call(this);
+            this.data = "";
+            this.transmit_ = function () {
+                if (_this.peerIo_)
+                    _this.peerIo_.broadcast(JSON.stringify(_this.data));
+            };
             console.log("prefix");
             console.log(prefix);
             navigator.getUserMedia = navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMedia;
@@ -64,10 +69,10 @@ var TexCardBoard;
                 console.log(stream);
                 _this.emit(Network.onVideo, stream);
             });
+            setInterval(this.transmit_, 60);
         };
         Network.prototype.send = function (data) {
-            if (this.peerIo_)
-                this.peerIo_.broadcast(JSON.stringify(data));
+            this.data = JSON.stringify(data);
         };
         Network.onVideo = "onVideo-in-network.ts";
         return Network;

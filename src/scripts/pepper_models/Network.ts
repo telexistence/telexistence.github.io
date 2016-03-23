@@ -5,6 +5,7 @@ module TexCardBoard{
   export class Network extends EventEmitter2{
     static onVideo = "onVideo-in-network.ts";
     private peerIo_;
+    private data = "";
 
     constructor(prefix: string){
       super();
@@ -66,11 +67,17 @@ module TexCardBoard{
         console.log(stream);
         this.emit(Network.onVideo, stream);
       });
+
+      setInterval(this.transmit_, 60);
     }
 
     send(data){
-      if(this.peerIo_) this.peerIo_.broadcast(JSON.stringify(data));
+      this.data = JSON.stringify(data);
     }
+
+    private transmit_ = ()=>{
+      if(this.peerIo_) this.peerIo_.broadcast(JSON.stringify(this.data));
+    };
   }
 }
 
