@@ -12,6 +12,7 @@ module TexCardBoard{
         }
 
         var message: any = {};
+        message.type = "CardBoard";
         message.alpha = e.alpha;
         message.beta = e.beta;
         message.gamma = e.gamma;

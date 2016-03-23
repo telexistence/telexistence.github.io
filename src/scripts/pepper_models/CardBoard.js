@@ -32,7 +32,7 @@ var TexCardBoard;
                     shading: THREE.FlatShading,
                     map: texture
                 });
-                var geometry = new THREE.PlaneGeometry(1000, 1000);
+                var geometry = new THREE.PlaneGeometry(512, 512);
                 _this.mesh = new THREE.Mesh(geometry, material);
                 _this.mesh.rotation.x = -Math.PI;
                 _this.mesh.position.set(0, -100, 500);
