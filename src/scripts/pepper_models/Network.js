@@ -15,7 +15,7 @@ var TexCardBoard;
             this.data = "";
             this.transmit_ = function () {
                 if (_this.peerIo_) {
-                    _this.peerIo_.broadcast(JSON.stringify(_this.data));
+                    _this.peerIo_.broadcast(_this.data);
                 }
             };
             console.log("prefix");
