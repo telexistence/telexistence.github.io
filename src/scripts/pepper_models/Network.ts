@@ -78,7 +78,11 @@ module TexCardBoard{
     private transmit_ = ()=>{
       console.log("transmit");
       console.log(this.peerIo_);
-      if(this.peerIo_) this.peerIo_.broadcast(JSON.stringify(this.data));
+      if(this.peerIo_) {
+        console.log("send");
+        console.log(this.data);
+        this.peerIo_.broadcast(JSON.stringify(this.data));
+      }
     };
   }
 }
