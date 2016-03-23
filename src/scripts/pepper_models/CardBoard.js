@@ -35,7 +35,7 @@ var TexCardBoard;
                 var geometry = new THREE.PlaneGeometry(512, 512);
                 _this.mesh = new THREE.Mesh(geometry, material);
                 _this.mesh.rotation.x = -Math.PI;
-                _this.mesh.position.set(0, -256, 600);
+                _this.mesh.position.set(0, 0, 600);
                 //this.mesh.rotation.y +=  Math.PI / 3.0
                 _this.scene.add(_this.mesh);
                 var _axis = new THREE.AxisHelper(10);
