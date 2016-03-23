@@ -68,7 +68,7 @@ module TexCardBoard {
       // ガイドの位置座標
       _axis.position.set(0, 0, 0);
       // ガイドをシーンへ追加
-      this.scene.add(_axis);
+      //this.scene.add(_axis);
 
       window.addEventListener('resize', this.resize, false);
       setTimeout(this.resize, 1);

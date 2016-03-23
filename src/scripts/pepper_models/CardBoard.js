@@ -43,7 +43,7 @@ var TexCardBoard;
                 // ガイドの位置座標
                 _axis.position.set(0, 0, 0);
                 // ガイドをシーンへ追加
-                _this.scene.add(_axis);
+                //this.scene.add(_axis);
                 window.addEventListener('resize', _this.resize, false);
                 setTimeout(_this.resize, 1);
                 document.addEventListener("webkitfullscreenchange", function () {
