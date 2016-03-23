@@ -59,7 +59,7 @@ module TexCardBoard {
 
       this.mesh = new THREE.Mesh(geometry, material);
       this.mesh.rotation.x = -Math.PI;
-      this.mesh.position.set(0, -100, 500);
+      this.mesh.position.set(0, -256, 600);
       //this.mesh.rotation.y +=  Math.PI / 3.0
       this.scene.add(this.mesh);
 
