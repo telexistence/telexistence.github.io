@@ -74,17 +74,21 @@ var TexCardBoard;
             setInterval(this.transmit_, 1000 / 60);
         };
         Network.prototype.append = function (data) {
+            /*
             this.data.push(data);
             this.data = this.data.slice(1, this.data.length);
-            this.sendData = new TexCardBoard.Orientation();
-            for (var i = 0; i < 5; i++) {
-                this.sendData.alpha += this.data[i].alpha;
-                this.sendData.beta += this.data[i].beta;
-                this.sendData.gamma += this.data[i].gamma;
+            this.sendData = new Orientation();
+            for(var i = 0; i < 5; i++){
+              this.sendData.alpha += this.data[i].alpha;
+              this.sendData.beta += this.data[i].beta;
+              this.sendData.gamma += this.data[i].gamma;
             }
+      
             this.sendData.alpha /= 5.0;
             this.sendData.beta /= 5.0;
             this.sendData.gamma /= 5.0;
+            */
+            this.sendData = data;
         };
         Network.onVideo = "onVideo-in-network.ts";
         return Network;

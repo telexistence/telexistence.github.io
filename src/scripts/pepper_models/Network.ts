@@ -75,6 +75,7 @@ module TexCardBoard{
     }
 
     append(data: Orientation){
+      /*
       this.data.push(data);
       this.data = this.data.slice(1, this.data.length);
       this.sendData = new Orientation();
@@ -87,6 +88,8 @@ module TexCardBoard{
       this.sendData.alpha /= 5.0;
       this.sendData.beta /= 5.0;
       this.sendData.gamma /= 5.0;
+      */
+      this.sendData = data;
     }
 
     private transmit_ = ()=>{
