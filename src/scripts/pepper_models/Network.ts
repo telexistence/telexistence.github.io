@@ -71,7 +71,7 @@ module TexCardBoard{
         this.emit(Network.onVideo, stream);
       });
 
-      setInterval(this.transmit_, 60);
+      setInterval(this.transmit_, 1000/60);
     }
 
     append(data: Orientation){
