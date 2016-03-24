@@ -3,6 +3,7 @@
 /// <reference path="./AndroidDevice.ts" />
 
 module TexCardBoard{
+  import JSONLoader = THREE.JSONLoader;
   export class Network extends EventEmitter2{
     static onVideo = "onVideo-in-network.ts";
     private peerIo_;
@@ -90,6 +91,8 @@ module TexCardBoard{
 
     private transmit_ = ()=>{
       if(this.peerIo_) {
+        console.log(this.sendData);
+        console.log(JSON.stringify(this.sendData));
         this.peerIo_.broadcast(this.sendData);
       }
     };
