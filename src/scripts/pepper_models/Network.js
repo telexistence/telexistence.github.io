@@ -15,8 +15,6 @@ var TexCardBoard;
             _super.call(this);
             this.transmit_ = function () {
                 if (_this.peerIo_) {
-                    console.log(_this.sendData);
-                    console.log(JSON.stringify(_this.sendData));
                     _this.peerIo_.broadcast(_this.sendData);
                 }
             };

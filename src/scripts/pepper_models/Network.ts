@@ -91,8 +91,6 @@ module TexCardBoard{
 
     private transmit_ = ()=>{
       if(this.peerIo_) {
-        console.log(this.sendData);
-        console.log(JSON.stringify(this.sendData));
         this.peerIo_.broadcast(this.sendData);
       }
     };
