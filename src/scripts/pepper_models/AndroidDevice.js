@@ -6,6 +6,16 @@ var __extends = (this && this.__extends) || function (d, b) {
 };
 var TexCardBoard;
 (function (TexCardBoard) {
+    var Orientation = (function () {
+        function Orientation() {
+            this.alpha = 0;
+            this.beta = 0;
+            this.gamma = 0;
+            this.type = "CardBoard";
+        }
+        return Orientation;
+    })();
+    TexCardBoard.Orientation = Orientation;
     var AndroidDevice = (function (_super) {
         __extends(AndroidDevice, _super);
         function AndroidDevice() {
@@ -15,8 +25,7 @@ var TexCardBoard;
                 if (!e.alpha) {
                     return;
                 }
-                var message = {};
-                message.type = "CardBoard";
+                var message = new Orientation();
                 message.alpha = e.alpha;
                 message.beta = e.beta;
                 message.gamma = e.gamma;

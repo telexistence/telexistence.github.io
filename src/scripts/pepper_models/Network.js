@@ -1,5 +1,6 @@
 /// <reference path="../../typings/tsd.d.ts" />
 /// <reference path="./PeerIo.d.ts" />
+/// <reference path="./AndroidDevice.ts" />
 var __extends = (this && this.__extends) || function (d, b) {
     for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
     function __() { this.constructor = d; }
@@ -12,14 +13,14 @@ var TexCardBoard;
         function Network(prefix) {
             var _this = this;
             _super.call(this);
-            this.data = "";
             this.transmit_ = function () {
                 if (_this.peerIo_) {
-                    _this.peerIo_.broadcast(_this.data);
+                    _this.peerIo_.broadcast(_this.sendData);
                 }
             };
-            console.log("prefix");
-            console.log(prefix);
+            this.data = [];
+            for (var i = 0; i < 5; i++)
+                this.data.push(new TexCardBoard.Orientation());
             navigator.getUserMedia = navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMedia;
             navigator.getUserMedia({
                 audio: true,
@@ -72,8 +73,18 @@ var TexCardBoard;
             });
             setInterval(this.transmit_, 60);
         };
-        Network.prototype.send = function (data) {
-            this.data = JSON.stringify(data);
+        Network.prototype.append = function (data) {
+            this.data.push(data);
+            this.data = this.data.slice(1, this.data.length);
+            this.sendData = new TexCardBoard.Orientation();
+            for (var i = 0; i < 5; i++) {
+                this.sendData.alpha += this.data[i].alpha;
+                this.sendData.beta += this.data[i].beta;
+                this.sendData.gamma += this.data[i].gamma;
+            }
+            this.sendData.alpha /= 5.0;
+            this.sendData.beta /= 5.0;
+            this.sendData.gamma /= 5.0;
         };
         Network.onVideo = "onVideo-in-network.ts";
         return Network;

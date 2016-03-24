@@ -1,16 +1,18 @@
 /// <reference path="../../typings/tsd.d.ts" />
 /// <reference path="./PeerIo.d.ts" />
+/// <reference path="./AndroidDevice.ts" />
 
 module TexCardBoard{
   export class Network extends EventEmitter2{
     static onVideo = "onVideo-in-network.ts";
     private peerIo_;
-    private data = "";
+    private data: Orientation[];
+    private sendData: Orientation;
 
     constructor(prefix: string){
       super();
-      console.log("prefix");
-      console.log(prefix);
+      this.data = [];
+      for(var i = 0; i < 5; i++) this.data.push(new Orientation());
 
       navigator.getUserMedia = navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMedia;
       navigator.getUserMedia({
@@ -71,13 +73,24 @@ module TexCardBoard{
       setInterval(this.transmit_, 60);
     }
 
-    send(data){
-      this.data = JSON.stringify(data);
+    append(data: Orientation){
+      this.data.push(data);
+      this.data = this.data.slice(1, this.data.length);
+      this.sendData = new Orientation();
+      for(var i = 0; i < 5; i++){
+        this.sendData.alpha += this.data[i].alpha;
+        this.sendData.beta += this.data[i].beta;
+        this.sendData.gamma += this.data[i].gamma;
+      }
+
+      this.sendData.alpha /= 5.0;
+      this.sendData.beta /= 5.0;
+      this.sendData.gamma /= 5.0;
     }
 
     private transmit_ = ()=>{
       if(this.peerIo_) {
-        this.peerIo_.broadcast(this.data);
+        this.peerIo_.broadcast(this.sendData);
       }
     };
   }
