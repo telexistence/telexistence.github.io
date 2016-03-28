@@ -83,10 +83,10 @@ module TexCardBoard {
       this.controls = new DeviceOrientationController(this.camera, this.renderer.domElement );
       this.controls.connect();
 
-      this.controls.onCardBoard = (orientation)=>{
+      this.controls.onCardBoard = (vector)=>{
         var orientation = new Orientation();
-        orientation.alpha = orientation.x * 180;
-        orientation.gamma = orientation.z * 180;
+        orientation.alpha = vector.x * 180;
+        orientation.gamma = vector.z * 180;
         this.emit(CardBoard.OnOrientation, orientation);
       };
 
