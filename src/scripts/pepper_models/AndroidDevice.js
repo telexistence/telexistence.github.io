@@ -35,7 +35,7 @@ var TexCardBoard;
                     x = (x + 180) % 360 - 180;
                     y = -90 - y;
                 }
-                message.alpha = x;
+                message.alpha = e.alpha;
                 message.gamma = y;
                 _this.emit(AndroidDevice.OnDeviceOrientation, message);
             };
