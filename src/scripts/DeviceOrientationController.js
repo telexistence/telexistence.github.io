@@ -419,6 +419,7 @@ var DeviceOrientationController = function ( object, domElement ) {
 
 				var vector = new THREE.Vector3( 1, 0, 0 );
 				vector.applyQuaternion( deviceQuat );
+				console.log(deviceQuat);
 				console.log(vector.x + ", " + vector.y +", " + vector.z);
 				self.onCardBoard(vector);
 
@@ -426,7 +427,6 @@ var DeviceOrientationController = function ( object, domElement ) {
 
 				//this.object.quaternion.slerp( deviceQuat, 0.07 ); // smoothing
 				this.object.quaternion.copy( deviceQuat );
-
 			}
 
 		};
