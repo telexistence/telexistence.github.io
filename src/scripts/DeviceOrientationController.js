@@ -420,7 +420,7 @@ var DeviceOrientationController = function ( object, domElement ) {
 				}
 
 				console.log("quotation");
-				console.log(deviceQuat);
+				console.log(deviceMatrix);
 				self.onOrientation("quotation", deviceQuat);
 
 				if ( this.freeze ) return;
