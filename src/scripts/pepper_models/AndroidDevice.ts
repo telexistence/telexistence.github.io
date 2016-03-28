@@ -3,7 +3,6 @@
 module TexCardBoard{
   export class Orientation {
     alpha = 0;
-    beta = 0;
     gamma = 0;
     type = "CardBoard";
   }
@@ -19,14 +18,36 @@ module TexCardBoard{
         }
 
         var message = new Orientation();
-        message.alpha = e.alpha;
-        message.beta = e.beta;
-        message.gamma = e.gamma;
+        var x = e.alpha;
+        var y = e.gamma;
+        if(y > 0){
+          x = x - 180;
+          y = 90 - y;
+        } else{
+          x = (x + 180) % 360 - 180;
+          y = -90 - y;
+        }
+        message.alpha = x;
+        message.gamma = y;
+
         this.emit(AndroidDevice.OnDeviceOrientation, message);
       };
 
       window.addEventListener('deviceorientation', setOrientationControls, true);
     }
+
+    movingAverage(orientations: Orientation[]){
+
+    }
+    /*
+    averageWithoutOffset(first: number, second: number): number{
+      if(Math.abs(first - second) > 180){
+
+      } else{
+
+      }
+    }
+    */
   }
 }
 

@@ -9,7 +9,6 @@ var TexCardBoard;
     var Orientation = (function () {
         function Orientation() {
             this.alpha = 0;
-            this.beta = 0;
             this.gamma = 0;
             this.type = "CardBoard";
         }
@@ -26,13 +25,24 @@ var TexCardBoard;
                     return;
                 }
                 var message = new Orientation();
-                message.alpha = e.alpha;
-                message.beta = e.beta;
-                message.gamma = e.gamma;
+                var x = e.alpha;
+                var y = e.gamma;
+                if (y > 0) {
+                    x = x - 180;
+                    y = 90 - y;
+                }
+                else {
+                    x = (x + 180) % 360 - 180;
+                    y = -90 - y;
+                }
+                message.alpha = x;
+                message.gamma = y;
                 _this.emit(AndroidDevice.OnDeviceOrientation, message);
             };
             window.addEventListener('deviceorientation', setOrientationControls, true);
         }
+        AndroidDevice.prototype.movingAverage = function (orientations) {
+        };
         AndroidDevice.OnDeviceOrientation = "onDeviceOrientation-AndroidDevice.ts";
         return AndroidDevice;
     })(EventEmitter2);
