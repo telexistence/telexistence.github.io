@@ -424,6 +424,8 @@ var DeviceOrientationController = function ( object, domElement ) {
 				var m3 = new THREE.Matrix4();
 				m3.makeRotationFromQuaternion(deviceQuat);
 				var vector = new THREE.Vector3(0, 0, 0);
+				console.log("vector");
+				console.log(vector);
 				vector.setFromMatrixPosition(m3);
 				self.onCardBoard("quotation", vector);
 
