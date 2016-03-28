@@ -12,7 +12,6 @@
 **/
 
 var DeviceOrientationController = function ( object, domElement ) {
-	console.log("deviceorientationcontroller=========");
 	var self = this;
 
 	this.object = object;
@@ -398,7 +397,6 @@ var DeviceOrientationController = function ( object, domElement ) {
 
 		return function () {
 
-			console.log("updatedevicemove");
 			alpha  = THREE.Math.degToRad( this.deviceOrientation.alpha || 0 ); // Z
 			beta   = THREE.Math.degToRad( this.deviceOrientation.beta  || 0 ); // X'
 			gamma  = THREE.Math.degToRad( this.deviceOrientation.gamma || 0 ); // Y''
@@ -422,7 +420,7 @@ var DeviceOrientationController = function ( object, domElement ) {
 				var vector = new THREE.Vector3( 1, 0, 0 );
 				vector.applyQuaternion( deviceQuat );
 				console.log(vector.x + ", " + vector.y +", " + vector.z);
-				//self.onOrientation("quotation", m3);
+				self.onCardBoard("quotation", vector);
 
 				if ( this.freeze ) return;
 
@@ -436,7 +434,6 @@ var DeviceOrientationController = function ( object, domElement ) {
 	}();
 
 	this.update = function () {
-		console.log("update");
 		this.updateDeviceMove();
 
 		if ( appState !== CONTROLLER_STATE.AUTO ) {
