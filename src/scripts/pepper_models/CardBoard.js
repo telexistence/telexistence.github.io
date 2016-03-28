@@ -1,9 +1,16 @@
 /// <reference path="../../typings/tsd.d.ts" />
+var __extends = (this && this.__extends) || function (d, b) {
+    for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
+    function __() { this.constructor = d; }
+    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+};
 var TexCardBoard;
 (function (TexCardBoard) {
-    var CardBoard = (function () {
+    var CardBoard = (function (_super) {
+        __extends(CardBoard, _super);
         function CardBoard(video) {
             var _this = this;
+            _super.call(this);
             this.video = video;
             this.contentWidth = 500;
             this.contentHeight = 400;
@@ -44,6 +51,11 @@ var TexCardBoard;
                 _axis.position.set(0, 0, 0);
                 // ガイドをシーンへ追加
                 //this.scene.add(_axis);
+                _this.controls = new DeviceOrientationController(_this.camera, _this.renderer.domElement);
+                _this.controls.connect();
+                _this.controls.addEventListener(CardBoard.OnOrientation, function (orientation) {
+                    this.emit("orientation", orientation);
+                });
                 window.addEventListener('resize', _this.resize, false);
                 setTimeout(_this.resize, 1);
                 document.addEventListener("webkitfullscreenchange", function () {
@@ -95,8 +107,9 @@ var TexCardBoard;
             this.init();
             this.animate();
         }
+        CardBoard.OnOrientation = "onOrientation-in-cardboard.ts";
         return CardBoard;
-    })();
+    })(EventEmitter2);
     TexCardBoard.CardBoard = CardBoard;
 })(TexCardBoard || (TexCardBoard = {}));
 //# sourceMappingURL=CardBoard.js.map

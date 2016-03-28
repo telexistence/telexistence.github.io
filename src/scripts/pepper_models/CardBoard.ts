@@ -1,7 +1,9 @@
 /// <reference path="../../typings/tsd.d.ts" />
 
+declare var DeviceOrientationController;
+
 module TexCardBoard {
-  export class CardBoard {
+  export class CardBoard extends EventEmitter2{
     private camera:THREE.PerspectiveCamera;
     private scene:THREE.Scene;
     private renderer:THREE.WebGLRenderer;
@@ -12,8 +14,12 @@ module TexCardBoard {
     private clock:THREE.Clock;
     private effect;
     private mesh:THREE.Mesh;
+    private controls: any;
+
+    static OnOrientation = "onOrientation-in-cardboard.ts";
 
     constructor(private video: HTMLVideoElement) {
+      super();
       console.log(THREE);
       this.clock = new THREE.Clock();
       console.log(this.clock);
@@ -69,6 +75,13 @@ module TexCardBoard {
       _axis.position.set(0, 0, 0);
       // ガイドをシーンへ追加
       //this.scene.add(_axis);
+
+      this.controls = new DeviceOrientationController(this.camera, this.renderer.domElement );
+      this.controls.connect();
+
+      this.controls.addEventListener(CardBoard.OnOrientation, function(orientation) {
+        this.emit("orientation", orientation);
+      });
 
       window.addEventListener('resize', this.resize, false);
       setTimeout(this.resize, 1);

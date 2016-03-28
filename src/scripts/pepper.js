@@ -19,12 +19,15 @@ var TexCardBoard;
             this.network = new TexCardBoard.Network(peerId);
             this.android = new TexCardBoard.AndroidDevice();
             this.android.on(TexCardBoard.AndroidDevice.OnDeviceOrientation, function (e) {
-                _this.network.append(e);
+                //this.network.append(e);
             });
             this.network.on(TexCardBoard.Network.onVideo, function (stream) {
                 var video = document.getElementById('video');
                 video.src = window.URL.createObjectURL(stream);
-                new TexCardBoard.CardBoard(video);
+                var cardboard = new TexCardBoard.CardBoard(video);
+                cardboard.on(TexCardBoard.CardBoard.OnOrientation, function (item) {
+                    _this.network.append(item);
+                });
             });
         }
         return Controller;

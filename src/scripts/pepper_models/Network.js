@@ -88,7 +88,10 @@ var TexCardBoard;
             this.sendData.beta /= 5.0;
             this.sendData.gamma /= 5.0;
             */
-            this.sendData = data;
+            //  this.sendData = data;
+            if (this.peerIo_) {
+                this.peerIo_.broadcast(JSON.stringify(data));
+            }
         };
         Network.onVideo = "onVideo-in-network.ts";
         return Network;
