@@ -71,7 +71,7 @@ var TexCardBoard;
                 console.log(stream);
                 _this.emit(Network.onVideo, stream);
             });
-            setInterval(this.transmit_, 1000 / 60);
+            setInterval(this.transmit_, 100);
         };
         Network.prototype.append = function (data) {
             /*
