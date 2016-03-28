@@ -39,7 +39,7 @@ var TexCardBoard;
                 message.gamma = y;
                 _this.emit(AndroidDevice.OnDeviceOrientation, message);
             };
-            window.addEventListener('deviceorientation', setOrientationControls, true);
+            //window.addEventListener('deviceorientation', setOrientationControls, true);
         }
         AndroidDevice.prototype.movingAverage = function (orientations) {
         };

@@ -33,7 +33,7 @@ module TexCardBoard{
         this.emit(AndroidDevice.OnDeviceOrientation, message);
       };
 
-      window.addEventListener('deviceorientation', setOrientationControls, true);
+      //window.addEventListener('deviceorientation', setOrientationControls, true);
     }
 
     movingAverage(orientations: Orientation[]){

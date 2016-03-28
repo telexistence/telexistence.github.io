@@ -434,6 +434,7 @@ var DeviceOrientationController = function ( object, domElement ) {
 	}();
 
 	this.update = function () {
+		console.log("update");
 		this.updateDeviceMove();
 
 		if ( appState !== CONTROLLER_STATE.AUTO ) {
