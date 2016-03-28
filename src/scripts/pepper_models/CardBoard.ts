@@ -85,6 +85,7 @@ module TexCardBoard {
 
       this.controls.onCardBoard = (vector)=>{
         var orientation: any = {};
+        orientation.type = "CardBoard";
         orientation.w = vector.w;
         orientation.x = vector.x;
         orientation.y = vector.y;

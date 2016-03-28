@@ -64,6 +64,7 @@ var TexCardBoard;
                 _this.controls.connect();
                 _this.controls.onCardBoard = function (vector) {
                     var orientation = {};
+                    orientation.type = "CardBoard";
                     orientation.w = vector.w;
                     orientation.x = vector.x;
                     orientation.y = vector.y;
