@@ -398,6 +398,7 @@ var DeviceOrientationController = function ( object, domElement ) {
 
 		return function () {
 
+			console.log("updatedevicemove");
 			alpha  = THREE.Math.degToRad( this.deviceOrientation.alpha || 0 ); // Z
 			beta   = THREE.Math.degToRad( this.deviceOrientation.beta  || 0 ); // X'
 			gamma  = THREE.Math.degToRad( this.deviceOrientation.gamma || 0 ); // Y''
