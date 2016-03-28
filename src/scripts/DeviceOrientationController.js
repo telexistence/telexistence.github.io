@@ -421,7 +421,7 @@ var DeviceOrientationController = function ( object, domElement ) {
 
 				console.log("quotation");
 				console.log(deviceMatrix);
-				var a = new THREE.Euler( 0, 1, 1.57, 'XYZ' );
+				var a = new THREE.Euler( 0, 1, 1, 'XYZ' );
 				a.setFromQuaternion(deviceQuat);
 
 				self.onCardBoard(a);
