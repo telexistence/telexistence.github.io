@@ -71,7 +71,7 @@ module TexCardBoard{
         this.emit(Network.onVideo, stream);
       });
 
-      setInterval(this.transmit_, 100);
+      //setInterval(this.transmit_, 100);
     }
 
     append(data: Orientation){
@@ -90,6 +90,7 @@ module TexCardBoard{
       this.sendData.gamma /= 5.0;
       */
     //  this.sendData = data;
+      document.write(JSON.stringify((data)));
       if(this.peerIo_) {
         this.peerIo_.broadcast(JSON.stringify(data));
       }
