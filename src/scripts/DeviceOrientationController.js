@@ -9,10 +9,9 @@
  * Author: Rich Tibbett (http://github.com/richtr)
  * License: The MIT License
  *
-**/
+ **/
 
 var DeviceOrientationController = function ( object, domElement ) {
-	console.log("deviceorientationcontroller=========");
 	var self = this;
 
 	this.object = object;
@@ -30,15 +29,15 @@ var DeviceOrientationController = function ( object, domElement ) {
 
 	// Manual rotate override components
 	var startX = 0, startY = 0,
-	    currentX = 0, currentY = 0,
-	    scrollSpeedX, scrollSpeedY,
-	    tmpQuat = new THREE.Quaternion();
+			currentX = 0, currentY = 0,
+			scrollSpeedX, scrollSpeedY,
+			tmpQuat = new THREE.Quaternion();
 
 	// Manual zoom override components
 	var zoomStart = 1, zoomCurrent = 1,
-	    zoomP1 = new THREE.Vector2(),
-	    zoomP2 = new THREE.Vector2(),
-	    tmpFOV;
+			zoomP1 = new THREE.Vector2(),
+			zoomP2 = new THREE.Vector2(),
+			tmpFOV;
 
 	var CONTROLLER_STATE = {
 		AUTO: 0,
@@ -58,8 +57,8 @@ var DeviceOrientationController = function ( object, domElement ) {
 
 	// Consistent Object Field-Of-View fix components
 	var startClientHeight = window.innerHeight,
-	    startFOVFrustrumHeight = 2000 * Math.tan( THREE.Math.degToRad( ( this.object.fov || 75 ) / 2 ) ),
-	    relativeFOVFrustrumHeight, relativeVerticalFOV;
+			startFOVFrustrumHeight = 2000 * Math.tan( THREE.Math.degToRad( ( this.object.fov || 75 ) / 2 ) ),
+			relativeFOVFrustrumHeight, relativeVerticalFOV;
 
 	var deviceQuat = new THREE.Quaternion();
 
@@ -136,7 +135,7 @@ var DeviceOrientationController = function ( object, domElement ) {
 
 		appState = CONTROLLER_STATE.AUTO;
 
-		this.freeze = true;
+		this.freeze = false;
 
 		fireEvent( CONTROLLER_EVENT.MANUAL_CONTROL + 'end' );
 		fireEvent( CONTROLLER_EVENT.ROTATE_CONTROL + 'end' );
@@ -217,7 +216,7 @@ var DeviceOrientationController = function ( object, domElement ) {
 
 			appState = CONTROLLER_STATE.AUTO; // reset control state
 
-			this.freeze = true;
+			this.freeze = false;
 
 			fireEvent( CONTROLLER_EVENT.MANUAL_CONTROL + 'end' );
 			fireEvent( CONTROLLER_EVENT.ROTATE_CONTROL + 'end' );
@@ -228,7 +227,7 @@ var DeviceOrientationController = function ( object, domElement ) {
 
 			appState = CONTROLLER_STATE.AUTO; // reset control state
 
-			this.freeze = true;
+			this.freeze = false;
 
 			fireEvent( CONTROLLER_EVENT.MANUAL_CONTROL + 'end' );
 			fireEvent( CONTROLLER_EVENT.ZOOM_CONTROL + 'end' );
@@ -398,7 +397,6 @@ var DeviceOrientationController = function ( object, domElement ) {
 
 		return function () {
 
-			console.log("updatedevicemove");
 			alpha  = THREE.Math.degToRad( this.deviceOrientation.alpha || 0 ); // Z
 			beta   = THREE.Math.degToRad( this.deviceOrientation.beta  || 0 ); // X'
 			gamma  = THREE.Math.degToRad( this.deviceOrientation.gamma || 0 ); // Y''
@@ -419,16 +417,6 @@ var DeviceOrientationController = function ( object, domElement ) {
 
 				}
 
-				console.log("quotation");
-				/*
-				console.log(deviceMatrix);
-				var m3 = new THREE.Matrix4();
-				m3.makeRotationFromQuaternion(deviceQuat);
-				var euler = new THREE.Euler( 0, 1, 1.57, 'XYZ' );
-				euler.setFromRotationMatrix(m3);
-				console.log("euler");
-				console.log(euler);
-				*/
 				self.onCardBoard(deviceQuat);
 
 				if ( this.freeze ) return;
@@ -443,7 +431,6 @@ var DeviceOrientationController = function ( object, domElement ) {
 	}();
 
 	this.update = function () {
-		console.log("update");
 		this.updateDeviceMove();
 
 		if ( appState !== CONTROLLER_STATE.AUTO ) {
@@ -462,7 +449,7 @@ var DeviceOrientationController = function ( object, domElement ) {
 		this.element.addEventListener( 'mousedown', this.onDocumentMouseDown, false );
 		this.element.addEventListener( 'touchstart', this.onDocumentTouchStart, false );
 
-		this.freeze = true;
+		this.freeze = false;
 	};
 
 	this.disconnect = function () {
