@@ -421,10 +421,10 @@ var DeviceOrientationController = function ( object, domElement ) {
 
 				console.log("quotation");
 				console.log(deviceMatrix);
-				var m3 = new THREE.Matrix4();
-				m3.makeRotationFromQuaternion(deviceQuat);
-				console.log(m3);
-				self.onOrientation("quotation", m3);
+				var vector = new THREE.Vector3( 1, 0, 0 );
+				vector.applyQuaternion( quaternion );
+				console.log(vector);
+				//self.onOrientation("quotation", m3);
 
 				if ( this.freeze ) return;
 
