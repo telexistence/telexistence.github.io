@@ -420,7 +420,7 @@ var DeviceOrientationController = function ( object, domElement ) {
 				var vector = new THREE.Vector3( 1, 0, 0 );
 				vector.applyQuaternion( deviceQuat );
 				console.log(vector.x + ", " + vector.y +", " + vector.z);
-				self.onCardBoard("quotation", vector);
+				self.onCardBoard(vector);
 
 				if ( this.freeze ) return;
 
