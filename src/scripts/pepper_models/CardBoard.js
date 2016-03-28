@@ -81,6 +81,7 @@ var TexCardBoard;
             this.update = function (dt) {
                 _this.resize();
                 _this.camera.updateProjectionMatrix();
+                _this.controls.update();
             };
             this.render = function (t) {
                 _this.effect.render(_this.scene, _this.camera);

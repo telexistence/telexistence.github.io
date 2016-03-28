@@ -112,6 +112,7 @@ module TexCardBoard {
     update = (dt)=> {
       this.resize();
       this.camera.updateProjectionMatrix();
+      this.controls.update();
     };
 
     render = (t)=> {
