@@ -416,6 +416,8 @@ var DeviceOrientationController = function ( object, domElement ) {
 
 				}
 
+				this.emit("quotation", deviceQuat);
+
 				if ( this.freeze ) return;
 
 				//this.object.quaternion.slerp( deviceQuat, 0.07 ); // smoothing

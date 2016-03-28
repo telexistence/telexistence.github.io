@@ -53,8 +53,8 @@ var TexCardBoard;
                 //this.scene.add(_axis);
                 _this.controls = new DeviceOrientationController(_this.camera, _this.renderer.domElement);
                 _this.controls.connect();
-                _this.controls.addEventListener(CardBoard.OnOrientation, function (orientation) {
-                    this.emit("orientation", orientation);
+                _this.controls.addEventListener('quotation', function (orientation) {
+                    this.emit(CardBoard.OnOrientation, orientation);
                 });
                 window.addEventListener('resize', _this.resize, false);
                 setTimeout(_this.resize, 1);

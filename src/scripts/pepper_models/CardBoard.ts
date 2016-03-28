@@ -79,8 +79,8 @@ module TexCardBoard {
       this.controls = new DeviceOrientationController(this.camera, this.renderer.domElement );
       this.controls.connect();
 
-      this.controls.addEventListener(CardBoard.OnOrientation, function(orientation) {
-        this.emit("orientation", orientation);
+      this.controls.addEventListener('quotation', function(orientation) {
+        this.emit(CardBoard.OnOrientation, orientation);
       });
 
       window.addEventListener('resize', this.resize, false);
