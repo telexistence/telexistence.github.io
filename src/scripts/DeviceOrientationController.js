@@ -427,7 +427,7 @@ var DeviceOrientationController = function ( object, domElement ) {
 				euler.setFromRotationMatrix(m3);
 				console.log("euler");
 				console.log(euler);
-				self.onCardBoard("quotation", euler);
+				self.onCardBoard(euler);
 
 				if ( this.freeze ) return;
 
