@@ -6,6 +6,15 @@ var __extends = (this && this.__extends) || function (d, b) {
 };
 var TexCardBoard;
 (function (TexCardBoard) {
+    var Orientation = (function () {
+        function Orientation() {
+            this.alpha = 0;
+            this.gamma = 0;
+            this.type = "CardBoard";
+        }
+        return Orientation;
+    })();
+    TexCardBoard.Orientation = Orientation;
     var CardBoard = (function (_super) {
         __extends(CardBoard, _super);
         function CardBoard(video) {
@@ -51,12 +60,12 @@ var TexCardBoard;
                 _axis.position.set(0, 0, 0);
                 // ガイドをシーンへ追加
                 //this.scene.add(_axis);
-                console.log("controls");
                 _this.controls = new DeviceOrientationController(_this.camera, _this.renderer.domElement);
                 _this.controls.connect();
                 _this.controls.onCardBoard = function (orientation) {
-                    console.log("orientation");
-                    console.log(orientation);
+                    var orientation = new Orientation();
+                    orientation.alpha = orientation.x * 180;
+                    orientation.gamma = orientation.z * 180;
                     _this.emit(CardBoard.OnOrientation, orientation);
                 };
                 window.addEventListener('resize', _this.resize, false);
@@ -105,9 +114,7 @@ var TexCardBoard;
                     _this.container.webkitRequestFullscreen();
                 }
             };
-            console.log(THREE);
             this.clock = new THREE.Clock();
-            console.log(this.clock);
             this.init();
             this.animate();
         }

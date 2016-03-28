@@ -3,6 +3,12 @@
 declare var DeviceOrientationController;
 
 module TexCardBoard {
+  export class Orientation {
+    alpha = 0;
+    gamma = 0;
+    type = "CardBoard";
+  }
+
   export class CardBoard extends EventEmitter2{
     private camera:THREE.PerspectiveCamera;
     private scene:THREE.Scene;
@@ -20,9 +26,7 @@ module TexCardBoard {
 
     constructor(private video: HTMLVideoElement) {
       super();
-      console.log(THREE);
       this.clock = new THREE.Clock();
-      console.log(this.clock);
       this.init();
       this.animate();
     }
@@ -76,13 +80,13 @@ module TexCardBoard {
       // ガイドをシーンへ追加
       //this.scene.add(_axis);
 
-      console.log("controls");
       this.controls = new DeviceOrientationController(this.camera, this.renderer.domElement );
       this.controls.connect();
 
       this.controls.onCardBoard = (orientation)=>{
-        console.log("orientation");
-        console.log(orientation);
+        var orientation = new Orientation();
+        orientation.alpha = orientation.x * 180;
+        orientation.gamma = orientation.z * 180;
         this.emit(CardBoard.OnOrientation, orientation);
       };
 
