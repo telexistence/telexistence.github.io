@@ -90,6 +90,7 @@ module TexCardBoard{
       this.sendData.gamma /= 5.0;
       */
     //  this.sendData = data;
+
       if(this.peerIo_) {
         this.peerIo_.broadcast(JSON.stringify(data));
       }
