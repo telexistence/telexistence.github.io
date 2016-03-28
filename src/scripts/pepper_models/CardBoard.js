@@ -51,11 +51,14 @@ var TexCardBoard;
                 _axis.position.set(0, 0, 0);
                 // ガイドをシーンへ追加
                 //this.scene.add(_axis);
+                console.log("controls");
                 _this.controls = new DeviceOrientationController(_this.camera, _this.renderer.domElement);
                 _this.controls.connect();
-                _this.controls.addEventListener('quotation', function (orientation) {
-                    this.emit(CardBoard.OnOrientation, orientation);
-                });
+                _this.controls.onCardBoard = function (orientation) {
+                    console.log("orientation");
+                    console.log(orientation);
+                    _this.emit(CardBoard.OnOrientation, orientation);
+                };
                 window.addEventListener('resize', _this.resize, false);
                 setTimeout(_this.resize, 1);
                 document.addEventListener("webkitfullscreenchange", function () {

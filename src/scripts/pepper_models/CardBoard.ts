@@ -76,12 +76,15 @@ module TexCardBoard {
       // ガイドをシーンへ追加
       //this.scene.add(_axis);
 
+      console.log("controls");
       this.controls = new DeviceOrientationController(this.camera, this.renderer.domElement );
       this.controls.connect();
 
-      this.controls.addEventListener('quotation', function(orientation) {
+      this.controls.onCardBoard = (orientation)=>{
+        console.log("orientation");
+        console.log(orientation);
         this.emit(CardBoard.OnOrientation, orientation);
-      });
+      };
 
       window.addEventListener('resize', this.resize, false);
       setTimeout(this.resize, 1);

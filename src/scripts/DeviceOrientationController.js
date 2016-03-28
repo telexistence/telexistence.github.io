@@ -12,6 +12,7 @@
 **/
 
 var DeviceOrientationController = function ( object, domElement ) {
+	var self = this;
 
 	this.object = object;
 	this.element = domElement || document;
@@ -416,7 +417,7 @@ var DeviceOrientationController = function ( object, domElement ) {
 
 				}
 
-				this.emit("quotation", deviceQuat);
+				self.onOrientation("quotation", deviceQuat);
 
 				if ( this.freeze ) return;
 
