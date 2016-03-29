@@ -44,6 +44,10 @@ module TexCardBoard{
       avg.gamma -= 90;
       return avg;
     }
+
+    tail(): Orientation{
+      return this.data[4];
+    }
   }
 
   export class Network extends EventEmitter2{
@@ -118,7 +122,8 @@ module TexCardBoard{
     }
 
     private transmit_ = ()=>{
-      var orientation = this.orientationManager_.average();
+      var orientation = this.orientationManager_.tail();
+      console.log(orientation);
       if(this.peerIo_) {
         this.peerIo_.broadcast(JSON.stringify(orientation));
       }

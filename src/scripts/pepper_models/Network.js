@@ -43,6 +43,9 @@ var TexCardBoard;
             avg.gamma -= 90;
             return avg;
         };
+        OrientationManager.prototype.tail = function () {
+            return this.data[4];
+        };
         return OrientationManager;
     })();
     var Network = (function (_super) {
@@ -52,7 +55,8 @@ var TexCardBoard;
             _super.call(this);
             this.orientationManager_ = new OrientationManager();
             this.transmit_ = function () {
-                var orientation = _this.orientationManager_.average();
+                var orientation = _this.orientationManager_.tail();
+                console.log(orientation);
                 if (_this.peerIo_) {
                     _this.peerIo_.broadcast(JSON.stringify(orientation));
                 }
