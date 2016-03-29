@@ -9,8 +9,10 @@ module TexCardBoard{
   class OrientationManager{
     private data: Orientation[];
     constructor(){
+      console.log("constructor");
       this.data = [];
       for(var i = 0; i < 4; i++){
+        console.log("constructor1");
         var orientation = new Orientation();
         console.log(orientation);
         orientation.alpha = 0;

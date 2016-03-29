@@ -10,8 +10,10 @@ var TexCardBoard;
 (function (TexCardBoard) {
     var OrientationManager = (function () {
         function OrientationManager() {
+            console.log("constructor");
             this.data = [];
             for (var i = 0; i < 4; i++) {
+                console.log("constructor1");
                 var orientation = new TexCardBoard.Orientation();
                 console.log(orientation);
                 orientation.alpha = 0;
