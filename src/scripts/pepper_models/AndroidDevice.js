@@ -28,17 +28,16 @@ var TexCardBoard;
                 var x = e.alpha;
                 var y = e.gamma;
                 if (y > 0) {
-                    x = x;
+                    x = x - 180;
                     y = 90 - y;
                 }
                 else {
-                    x = (x + 180) % 360;
+                    x = (x + 180) % 360 - 180;
                     y = -90 - y;
                 }
+                document.getElementById('debug').innerHTML = x + "<br />" + y; // event.alphaで方角の値を取得
                 message.alpha = x;
                 message.gamma = y;
-                document.getElementById('debug').innerHTML =
-                    message.alpha + "<br />" + message.gamma; // event.alphaで方角の値を取得
                 _this.emit(AndroidDevice.OnDeviceOrientation, message);
             };
             window.addEventListener('deviceorientation', setOrientationControls, true);
