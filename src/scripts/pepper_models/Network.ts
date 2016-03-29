@@ -79,7 +79,6 @@ module TexCardBoard{
       if(this.peerIo_) {
         this.peerIo_.broadcast(JSON.stringify(data));
         document.getElementById('directions').innerHTML = JSON.stringify(data); // event.alphaで方角の値を取得
-
       }
 
       /*
