@@ -36,8 +36,8 @@ var TexCardBoard;
             return orientation;
         };
         OrientationManager.prototype.average = function () {
-            var fis = this.averageOrientation(this.orientation[0], this.orientation[1]);
-            var snd = this.averageOrientation(this.orientation[2], this.orientation[3]);
+            var fis = this.averageOrientation(this.data[0], this.data[1]);
+            var snd = this.averageOrientation(this.data[2], this.data[3]);
             var avg = this.averageOrientation(fis, snd);
             avg.alpha -= 180;
             avg.gamma -= 90;
