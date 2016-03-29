@@ -128,7 +128,7 @@ var TexCardBoard;
                 console.log(stream);
                 _this.emit(Network.onVideo, stream);
             });
-            setInterval(this.transmit_, 100);
+            setInterval(this.transmit_, 1000 / 30);
         };
         Network.prototype.append = function (data) {
             this.orientationManager_.push(data);
