@@ -54,15 +54,12 @@ module TexCardBoard{
     }
 
     tail(): Orientation{
-      console.log("tail1");
-      var orientation = JSON.parse(JSON.stringify(this.data[3]));
-      console.log(orientation);
-      orientation.gamma -= 90;
-      console.log("tail2");
+      var orientation = new Orientation();
+      orientation.alpha = this.data[3].alpha;
+      orientation.gamma = this.data[3].gamma;
       orientation.alpha = (orientation.alpha - this.offset_ + 360) % 360;
-      console.log("tail3");
       orientation.alpha -= 180;
-      console.log("tail4");
+      orientation.gamma -= 90;
       return orientation;
     }
   }
@@ -140,7 +137,6 @@ module TexCardBoard{
 
     private transmit_ = ()=>{
       var orientation = this.orientationManager_.tail();
-      console.log("orientation");
       console.log(orientation);
       if(this.peerIo_) {
         this.peerIo_.broadcast(JSON.stringify(orientation));

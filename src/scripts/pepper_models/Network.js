@@ -51,15 +51,12 @@ var TexCardBoard;
             return avg;
         };
         OrientationManager.prototype.tail = function () {
-            console.log("tail1");
-            var orientation = JSON.parse(JSON.stringify(this.data[3]));
-            console.log(orientation);
-            orientation.gamma -= 90;
-            console.log("tail2");
+            var orientation = new TexCardBoard.Orientation();
+            orientation.alpha = this.data[3].alpha;
+            orientation.gamma = this.data[3].gamma;
             orientation.alpha = (orientation.alpha - this.offset_ + 360) % 360;
-            console.log("tail3");
             orientation.alpha -= 180;
-            console.log("tail4");
+            orientation.gamma -= 90;
             return orientation;
         };
         return OrientationManager;
@@ -72,7 +69,6 @@ var TexCardBoard;
             this.orientationManager_ = new OrientationManager();
             this.transmit_ = function () {
                 var orientation = _this.orientationManager_.tail();
-                console.log("orientation");
                 console.log(orientation);
                 if (_this.peerIo_) {
                     _this.peerIo_.broadcast(JSON.stringify(orientation));
