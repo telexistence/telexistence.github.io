@@ -23,7 +23,7 @@ var TexCardBoard;
             button.addEventListener('click', function () {
                 //calibration
                 console.log("click");
-                _this.offset_ = _this.data[3].alpha;
+                _this.offset_ = _this.data[3].alpha % 360;
             });
         }
         OrientationManager.prototype.push = function (orientation) {

@@ -23,7 +23,7 @@ module TexCardBoard{
       button.addEventListener('click', ()=>{
         //calibration
         console.log("click");
-        this.offset_ = this.data[3].alpha;
+        this.offset_ = this.data[3].alpha % 360;
       });
     }
 
