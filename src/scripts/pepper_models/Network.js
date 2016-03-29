@@ -13,8 +13,10 @@ var TexCardBoard;
             this.data = [];
             for (var i = 0; i < 4; i++) {
                 var orientation = new TexCardBoard.Orientation();
+                console.log(orientation);
                 orientation.alpha = 0;
                 orientation.gamma = 0;
+                console.log(orientation);
                 this.data.push(orientation);
             }
         }
