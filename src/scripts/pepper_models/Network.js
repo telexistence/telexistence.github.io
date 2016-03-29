@@ -56,7 +56,7 @@ var TexCardBoard;
             console.log(orientation);
             orientation.gamma -= 90;
             console.log("tail2");
-            orientation.alpha = (this.data[4].alpha - this.offset_ + 360) % 360;
+            orientation.alpha = (orientation.alpha - this.offset_ + 360) % 360;
             console.log("tail3");
             orientation.alpha -= 180;
             console.log("tail4");
