@@ -28,11 +28,10 @@ module TexCardBoard{
         } else{
           y = -90 - y;
         }
-        message.alpha = x;
+        message.alpha = x + 180;
         message.gamma = y;
 
-        document.getElementById('debug').innerHTML = x + "<br />" + y; // event.alphaで方角の値を取得
-
+        //document.getElementById('debug').innerHTML = x + "<br />" + y; // event.alphaで方角の値を取得
 
         this.emit(AndroidDevice.OnDeviceOrientation, message);
       };
