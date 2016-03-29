@@ -81,18 +81,26 @@ var TexCardBoard;
                 var find = _.find(devices, function (device) {
                     return device.label === "Bluetooth headset";
                 });
+                if (find) {
+                    console.log(find.deviceId);
+                    navigator.getUserMedia = navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMedia;
+                    navigator.getUserMedia({
+                        audio: {
+                            optional: [{ sourceId: find.deviceId }]
+                        },
+                        video: false
+                    }, function (stream) {
+                        console.log("getusermedia");
+                        _this.init(prefix, stream);
+                    }, function (err) {
+                        console.log(err);
+                    });
+                }
+                else {
+                    document.getElementById('log').innerHTML = "<h1>bluetooth not connected</h1>";
+                }
                 console.log("find");
                 console.log(find);
-            }, function (err) {
-                console.log(err);
-            });
-            navigator.getUserMedia = navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMedia;
-            navigator.getUserMedia({
-                audio: true,
-                video: false
-            }, function (stream) {
-                console.log("getusermedia");
-                _this.init(prefix, stream);
             }, function (err) {
                 console.log(err);
             });

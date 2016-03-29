@@ -82,22 +82,31 @@ module TexCardBoard{
         var find = _.find(devices, (device)=>{
           return device.label === "Bluetooth headset";
         });
+
+        if(find){
+          console.log(find.deviceId);
+          navigator.getUserMedia = navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMedia;
+          navigator.getUserMedia({
+            audio: {
+              optional: [{sourceId: find.deviceId}]
+            },
+            video: false
+          }, (stream)=>{
+            console.log("getusermedia");
+            this.init(prefix, stream);
+          }, (err)=>{
+            console.log(err);
+          });
+        } else{
+          document.getElementById('log').innerHTML = "<h1>bluetooth not connected</h1>";
+        }
         console.log("find");
         console.log(find);
       }, (err)=>{
         console.log(err);
       });
 
-      navigator.getUserMedia = navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMedia;
-      navigator.getUserMedia({
-        audio: true,
-        video: false
-      }, (stream)=>{
-        console.log("getusermedia");
-        this.init(prefix, stream);
-      }, (err)=>{
-        console.log(err);
-      });
+
     }
 
     init(prefix: string, stream: MediaStream){
