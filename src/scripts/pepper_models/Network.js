@@ -51,6 +51,8 @@ var TexCardBoard;
             return avg;
         };
         OrientationManager.prototype.tail = function () {
+            console.log("tail");
+            console.log(this.data[3]);
             var orientation = new TexCardBoard.Orientation();
             orientation.alpha = this.data[3].alpha;
             orientation.gamma = this.data[3].gamma;

@@ -54,6 +54,8 @@ module TexCardBoard{
     }
 
     tail(): Orientation{
+      console.log("tail");
+      console.log(this.data[3]);
       var orientation = new Orientation();
       orientation.alpha = this.data[3].alpha;
       orientation.gamma = this.data[3].gamma;
