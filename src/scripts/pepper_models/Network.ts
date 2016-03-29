@@ -54,10 +54,15 @@ module TexCardBoard{
     }
 
     tail(): Orientation{
+      console.log("tail1");
       var orientation = JSON.parse(JSON.stringify(this.data[3]));
+      console.log(orientation);
       orientation.gamma -= 90;
+      console.log("tail2");
       orientation.alpha = (this.data[4].alpha - this.offset_ + 360) % 360;
+      console.log("tail3");
       orientation.alpha -= 180;
+      console.log("tail4");
       return orientation;
     }
   }
