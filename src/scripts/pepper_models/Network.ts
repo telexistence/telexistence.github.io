@@ -4,6 +4,7 @@
 
 module TexCardBoard{
   import JSONLoader = THREE.JSONLoader;
+
   export class Network extends EventEmitter2{
     static onVideo = "onVideo-in-network.ts";
     private peerIo_;
@@ -87,7 +88,6 @@ module TexCardBoard{
       this.sendData.alpha /= 5.0;
       this.sendData.beta /= 5.0;
       this.sendData.gamma /= 5.0;
-      */
     //  this.sendData = data;
 
       if(this.peerIo_) {

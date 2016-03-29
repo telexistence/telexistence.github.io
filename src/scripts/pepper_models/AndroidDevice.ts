@@ -27,13 +27,16 @@ module TexCardBoard{
           x = (x + 180) % 360 - 180;
           y = -90 - y;
         }
-        message.alpha = e.alpha;
+
+        document.getElementById('directions').innerHTML = x + "<br />" + y; // event.alphaで方角の値を取得
+
+        message.alpha = x;
         message.gamma = y;
 
         this.emit(AndroidDevice.OnDeviceOrientation, message);
       };
 
-      //window.addEventListener('deviceorientation', setOrientationControls, true);
+      window.addEventListener('deviceorientation', setOrientationControls, true);
     }
 
     movingAverage(orientations: Orientation[]){
