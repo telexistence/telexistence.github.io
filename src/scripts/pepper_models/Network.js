@@ -22,7 +22,6 @@ var TexCardBoard;
             var button = document.getElementById('calibration');
             button.addEventListener('click', function () {
                 //calibration
-                console.log("click");
                 _this.offset_ = _this.data[3].alpha - 180;
             });
         }
@@ -51,7 +50,6 @@ var TexCardBoard;
             return avg;
         };
         OrientationManager.prototype.tail = function () {
-            console.log(this.data[3]);
             var orientation = new TexCardBoard.Orientation();
             orientation.alpha = this.data[3].alpha;
             orientation.gamma = this.data[3].gamma;

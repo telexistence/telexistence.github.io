@@ -30,7 +30,6 @@ module TexCardBoard{
 
         message.alpha = (x + 180) % 360;
         message.gamma = y;
-        console.log(message.alpha);
 
         this.emit(AndroidDevice.OnDeviceOrientation, message);
       };

@@ -36,7 +36,6 @@ var TexCardBoard;
                 }
                 message.alpha = (x + 180) % 360;
                 message.gamma = y;
-                console.log(message.alpha);
                 _this.emit(AndroidDevice.OnDeviceOrientation, message);
             };
             window.addEventListener('deviceorientation', setOrientationControls, true);

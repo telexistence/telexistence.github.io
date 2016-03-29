@@ -22,7 +22,6 @@ module TexCardBoard{
       var button = document.getElementById('calibration');
       button.addEventListener('click', ()=>{
         //calibration
-        console.log("click");
         this.offset_ = this.data[3].alpha - 180;
       });
     }
@@ -55,7 +54,6 @@ module TexCardBoard{
     }
 
     tail(): Orientation{
-      console.log(this.data[3]);
       var orientation = new Orientation();
       orientation.alpha = this.data[3].alpha;
       orientation.gamma = this.data[3].gamma;
