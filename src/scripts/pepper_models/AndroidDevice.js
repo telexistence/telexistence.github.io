@@ -36,6 +36,7 @@ var TexCardBoard;
                 }
                 message.alpha = x + 180;
                 message.gamma = y;
+                console.log(message.alpha);
                 //document.getElementById('debug').innerHTML = x + "<br />" + y; // event.alphaで方角の値を取得
                 _this.emit(AndroidDevice.OnDeviceOrientation, message);
             };

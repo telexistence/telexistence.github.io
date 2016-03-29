@@ -21,15 +21,16 @@ module TexCardBoard{
         var x = e.alpha;
         var y = e.gamma;
 
-
         if(y > 0){
           x = x - 180;
           y = 90 - y;
         } else{
           y = -90 - y;
         }
+
         message.alpha = x + 180;
         message.gamma = y;
+        console.log(message.alpha);
 
         //document.getElementById('debug').innerHTML = x + "<br />" + y; // event.alphaで方角の値を取得
 
