@@ -22,6 +22,7 @@ var TexCardBoard;
             var button = document.getElementById('calibration');
             button.addEventListener('click', function () {
                 //calibration
+                console.log("click");
                 _this.offset_ = _this.data[4].alpha;
             });
         }
