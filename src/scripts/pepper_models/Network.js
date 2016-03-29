@@ -10,12 +10,12 @@ var TexCardBoard;
 (function (TexCardBoard) {
     var OrientationManager = (function () {
         function OrientationManager() {
-            data = [];
+            this.data = [];
             for (var i = 0; i < 4; i++) {
                 var orientation = new TexCardBoard.Orientation();
                 orientation.alpha = 0;
                 orientation.gamma = 0;
-                data.push(orientation);
+                this.data.push(orientation);
             }
         }
         OrientationManager.prototype.push = function (orientation) {
@@ -37,7 +37,10 @@ var TexCardBoard;
         OrientationManager.prototype.average = function () {
             var fis = this.averageOrientation(orientation[0], orientation[1]);
             var snd = this.averageOrientation(orientation[2], orientation[3]);
-            return this.averageOrientation(fis, snd);
+            var avg = this.averageOrientation(fis, snd);
+            avg.alpha -= 180;
+            avg.gamma -= 90;
+            return avg;
         };
         return OrientationManager;
     })();
