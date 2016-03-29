@@ -21,17 +21,17 @@ module TexCardBoard{
         var x = e.alpha;
         var y = e.gamma;
 
-        document.getElementById('debug').innerHTML = x + "<br />" + y; // event.alphaで方角の値を取得
 
         if(y > 0){
           x = x - 180;
           y = 90 - y;
         } else{
-          x = (x + 180) % 360 - 180;
           y = -90 - y;
         }
-        message.alpha = e.alpha;
+        message.alpha = x;
         message.gamma = y;
+
+        document.getElementById('debug').innerHTML = x + "<br />" + y; // event.alphaで方角の値を取得
 
 
         this.emit(AndroidDevice.OnDeviceOrientation, message);
