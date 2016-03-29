@@ -62,6 +62,13 @@ module TexCardBoard{
       orientation.gamma = this.data[3].gamma;
       orientation.alpha = (orientation.alpha - this.offset_ + 360) % 360;
       orientation.alpha -= 180;
+
+      document.getElementById('debug').innerHTML =
+          orientation.alpha
+          + "<br />"
+          + orientation.gamma
+          + "<br/>"
+          + this.offset_; // event.alphaで方角の値を取得
       return orientation;
     }
   }
