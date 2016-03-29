@@ -22,7 +22,7 @@ module TexCardBoard{
       var button = document.getElementById('calibration');
       button.addEventListener('click', ()=>{
         //calibration
-        this.offset_ = this.average().alpha;
+        this.offset_ = this.data[4].alpha;
       });
     }
 
