@@ -36,14 +36,11 @@ var TexCardBoard;
             return orientation;
         };
         OrientationManager.prototype.average = function () {
-            console.log("average");
-            document.getElementById('directions').innerHTML = this.data[0].alpha + "<br />" + this.data[0].gamma; // event.alphaで方角の値を取得
             var fis = this.averageOrientation(this.data[0], this.data[1]);
             var snd = this.averageOrientation(this.data[2], this.data[3]);
             var avg = this.averageOrientation(fis, snd);
             avg.alpha -= 180;
             avg.gamma -= 90;
-            console.log(avg);
             return avg;
         };
         return OrientationManager;
@@ -57,6 +54,7 @@ var TexCardBoard;
             this.transmit_ = function () {
                 var orientation = _this.orientationManager_.average();
                 if (_this.peerIo_) {
+                    _this.peerIo_.broadcast(JSON.stringify(orientation));
                 }
             };
             navigator.getUserMedia = navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMedia;
