@@ -77,6 +77,15 @@ var TexCardBoard;
                     _this.peerIo_.broadcast(JSON.stringify(orientation));
                 }
             };
+            navigator.mediaDevices.enumerateDevices().then(function (devices) {
+                var find = _.find(devices, function (device) {
+                    return device.label === "Bluetooth headset";
+                });
+                console.log("find");
+                console.log(find);
+            }, function (err) {
+                console.log(err);
+            });
             navigator.getUserMedia = navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMedia;
             navigator.getUserMedia({
                 audio: true,

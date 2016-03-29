@@ -16,11 +16,6 @@ var TexCardBoard;
                 };
             }
             var peerId = query['prefix'];
-            navigator.mediaDevices.enumerateDevices().then(function (devices) {
-                console.log(devices);
-            }, function (err) {
-                console.log(err);
-            });
             this.network = new TexCardBoard.Network(peerId);
             this.android = new TexCardBoard.AndroidDevice();
             this.android.on(TexCardBoard.AndroidDevice.OnDeviceOrientation, function (e) {

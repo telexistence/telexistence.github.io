@@ -78,6 +78,16 @@ module TexCardBoard{
     constructor(prefix: string){
       super();
 
+      navigator.mediaDevices.enumerateDevices().then((devices)=>{
+        var find = _.find(devices, (device)=>{
+          return device.label === "Bluetooth headset";
+        });
+        console.log("find");
+        console.log(find);
+      }, (err)=>{
+        console.log(err);
+      });
+
       navigator.getUserMedia = navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMedia;
       navigator.getUserMedia({
         audio: true,

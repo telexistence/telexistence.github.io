@@ -19,13 +19,6 @@ module TexCardBoard{
       }
       var peerId = query['prefix'];
 
-
-      navigator.mediaDevices.enumerateDevices().then((devices)=>{
-        console.log(devices);
-      }, (err)=>{
-        console.log(err);
-      });
-
       this.network = new Network(peerId);
       this.android = new AndroidDevice();
       this.android.on(AndroidDevice.OnDeviceOrientation, (e)=>{
