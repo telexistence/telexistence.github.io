@@ -28,11 +28,11 @@ var TexCardBoard;
                 var x = e.alpha;
                 var y = e.gamma;
                 if (y > 0) {
-                    x = x - 180;
+                    x = x;
                     y = 90 - y;
                 }
                 else {
-                    x = (x + 180) % 360 - 180;
+                    x = (x + 180) % 360;
                     y = -90 - y;
                 }
                 document.getElementById('directions').innerHTML = x + "<br />" + y; // event.alphaで方角の値を取得
