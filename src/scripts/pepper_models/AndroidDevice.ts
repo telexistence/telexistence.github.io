@@ -28,7 +28,7 @@ module TexCardBoard{
           y = -90 - y;
         }
 
-        message.alpha = x + 180;
+        message.alpha = (x + 180) % 360;
         message.gamma = y;
         console.log(message.alpha);
 
