@@ -64,7 +64,7 @@ module TexCardBoard {
         map: texture
       });
 
-      var geometry = new THREE.PlaneGeometry(512, 512);
+      var geometry = new THREE.PlaneGeometry(640, 480);
 
       this.mesh = new THREE.Mesh(geometry, material);
       this.mesh.rotation.x = -Math.PI;
