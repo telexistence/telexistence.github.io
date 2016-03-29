@@ -10,6 +10,7 @@ var TexCardBoard;
 (function (TexCardBoard) {
     var OrientationManager = (function () {
         function OrientationManager() {
+            this.offset_ = 0;
             this.data = [];
             for (var i = 0; i < 4; i++) {
                 var orientation = new TexCardBoard.Orientation();
@@ -18,6 +19,10 @@ var TexCardBoard;
                 orientation.gamma = 0;
                 this.data.push(orientation);
             }
+            var button = document.getElementById('calibration');
+            button.addEventListener('click', function () {
+                console.log("click");
+            });
         }
         OrientationManager.prototype.push = function (orientation) {
             this.data = this.data.slice(1);

@@ -8,6 +8,8 @@ module TexCardBoard{
 
   class OrientationManager{
     private data: Orientation[];
+    private offset_ = 0;
+
     constructor(){
       this.data = [];
       for(var i = 0; i < 4; i++){
@@ -17,6 +19,11 @@ module TexCardBoard{
         orientation.gamma = 0;
         this.data.push(orientation);
       }
+
+      var button = document.getElementById('calibration');
+      button.addEventListener('click', ()=>{
+        console.log("click");
+      });
     }
 
     push(orientation: Orientation){
