@@ -23,7 +23,7 @@ module TexCardBoard{
       button.addEventListener('click', ()=>{
         //calibration
         console.log("click");
-        this.offset_ = this.data[3].alpha % 360;
+        this.offset_ = this.data[3].alpha - 180;
       });
     }
 
@@ -49,8 +49,6 @@ module TexCardBoard{
       var snd = this.averageOrientation(this.data[2], this.data[3]);
       var avg = this.averageOrientation(fis, snd);
 
-
-
       avg.alpha = (avg.alpha - this.offset_ + 360) % 360;
       avg.alpha -= 180;
       return avg;
@@ -61,8 +59,8 @@ module TexCardBoard{
       var orientation = new Orientation();
       orientation.alpha = this.data[3].alpha;
       orientation.gamma = this.data[3].gamma;
-      orientation.alpha = (orientation.alpha - this.offset_ + 360) % 360;
       orientation.alpha -= 180;
+      orientation.alpha = (orientation.alpha - this.offset_ + 360) % 360;
 
       document.getElementById('debug').innerHTML =
           orientation.alpha

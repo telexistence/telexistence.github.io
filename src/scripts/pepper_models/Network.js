@@ -23,7 +23,7 @@ var TexCardBoard;
             button.addEventListener('click', function () {
                 //calibration
                 console.log("click");
-                _this.offset_ = _this.data[3].alpha % 360;
+                _this.offset_ = _this.data[3].alpha - 180;
             });
         }
         OrientationManager.prototype.push = function (orientation) {
@@ -55,8 +55,8 @@ var TexCardBoard;
             var orientation = new TexCardBoard.Orientation();
             orientation.alpha = this.data[3].alpha;
             orientation.gamma = this.data[3].gamma;
-            orientation.alpha = (orientation.alpha - this.offset_ + 360) % 360;
             orientation.alpha -= 180;
+            orientation.alpha = (orientation.alpha - this.offset_ + 360) % 360;
             document.getElementById('debug').innerHTML =
                 orientation.alpha
                     + "<br />"
