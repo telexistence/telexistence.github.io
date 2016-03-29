@@ -55,8 +55,8 @@ var TexCardBoard;
             var orientation = new TexCardBoard.Orientation();
             orientation.alpha = this.data[3].alpha;
             orientation.gamma = this.data[3].gamma;
-            orientation.alpha -= 180;
             orientation.alpha = (orientation.alpha - this.offset_ + 360) % 360;
+            orientation.alpha -= 180;
             document.getElementById('debug').innerHTML =
                 orientation.alpha
                     + "<br />"
