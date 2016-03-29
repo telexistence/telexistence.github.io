@@ -51,7 +51,6 @@ var TexCardBoard;
             return avg;
         };
         OrientationManager.prototype.tail = function () {
-            console.log("tail");
             console.log(this.data[3]);
             var orientation = new TexCardBoard.Orientation();
             orientation.alpha = this.data[3].alpha;
@@ -71,7 +70,8 @@ var TexCardBoard;
             this.orientationManager_ = new OrientationManager();
             this.transmit_ = function () {
                 var orientation = _this.orientationManager_.tail();
-                console.log(orientation);
+                document.getElementById('directions').innerHTML =
+                    orientation.alpha + "<br />" + orientation.gamma; // event.alphaで方角の値を取得
                 if (_this.peerIo_) {
                     _this.peerIo_.broadcast(JSON.stringify(orientation));
                 }

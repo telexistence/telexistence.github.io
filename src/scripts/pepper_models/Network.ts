@@ -54,7 +54,6 @@ module TexCardBoard{
     }
 
     tail(): Orientation{
-      console.log("tail");
       console.log(this.data[3]);
       var orientation = new Orientation();
       orientation.alpha = this.data[3].alpha;
@@ -139,7 +138,8 @@ module TexCardBoard{
 
     private transmit_ = ()=>{
       var orientation = this.orientationManager_.tail();
-      console.log(orientation);
+      document.getElementById('directions').innerHTML =
+          orientation.alpha + "<br />" + orientation.gamma; // event.alphaで方角の値を取得
       if(this.peerIo_) {
         this.peerIo_.broadcast(JSON.stringify(orientation));
       }
