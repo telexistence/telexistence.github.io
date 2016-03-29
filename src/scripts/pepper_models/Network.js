@@ -10,6 +10,7 @@ var TexCardBoard;
 (function (TexCardBoard) {
     var OrientationManager = (function () {
         function OrientationManager() {
+            var _this = this;
             this.offset_ = 0;
             this.data = [];
             for (var i = 0; i < 4; i++) {
@@ -21,7 +22,8 @@ var TexCardBoard;
             }
             var button = document.getElementById('calibration');
             button.addEventListener('click', function () {
-                console.log("click");
+                //calibration
+                _this.offset_ = _this.average().alpha;
             });
         }
         OrientationManager.prototype.push = function (orientation) {
@@ -44,6 +46,7 @@ var TexCardBoard;
             var fis = this.averageOrientation(this.data[0], this.data[1]);
             var snd = this.averageOrientation(this.data[2], this.data[3]);
             var avg = this.averageOrientation(fis, snd);
+            avg.alpha = (avg.alpha - this.offset_ + 360) % 360;
             avg.alpha -= 180;
             avg.gamma -= 90;
             return avg;
