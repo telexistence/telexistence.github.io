@@ -9,15 +9,12 @@ module TexCardBoard{
   class OrientationManager{
     private data: Orientation[];
     constructor(){
-      console.log("constructor");
       this.data = [];
       for(var i = 0; i < 4; i++){
-        console.log("constructor1");
         var orientation = new Orientation();
         console.log(orientation);
         orientation.alpha = 0;
         orientation.gamma = 0;
-        console.log(orientation);
         this.data.push(orientation);
       }
     }
@@ -40,8 +37,8 @@ module TexCardBoard{
     }
 
     average(): Orientation{
-      var fis = this.averageOrientation(orientation[0], orientation[1]);
-      var snd = this.averageOrientation(orientation[2], orientation[3]);
+      var fis = this.averageOrientation(this.orientation[0], this.orientation[1]);
+      var snd = this.averageOrientation(this.orientation[2], this.orientation[3]);
       var avg = this.averageOrientation(fis, snd);
       avg.alpha -= 180;
       avg.gamma -= 90;
