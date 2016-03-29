@@ -30,7 +30,7 @@ var TexCardBoard;
                 _this.container.appendChild(_this.element);
                 _this.effect = new THREE.StereoEffect(_this.renderer);
                 _this.scene = new THREE.Scene();
-                _this.camera = new THREE.PerspectiveCamera(90, 1, 0.001, 700);
+                _this.camera = new THREE.PerspectiveCamera(90, 1, 0.001, 1000);
                 _this.camera.position.set(0, 0, -10);
                 _this.camera.lookAt(new THREE.Vector3(0, 0, 0));
                 _this.scene.add(_this.camera);
@@ -52,7 +52,7 @@ var TexCardBoard;
                 _this.mesh = new THREE.Mesh(geometry, material);
                 _this.mesh.rotation.x = -Math.PI;
                 _this.mesh.rotation.z = -Math.PI;
-                _this.mesh.position.set(0, 0, 690);
+                _this.mesh.position.set(0, 0, 990);
                 //this.mesh.rotation.y +=  Math.PI / 3.0
                 _this.scene.add(_this.mesh);
                 var _axis = new THREE.AxisHelper(10);

@@ -40,7 +40,7 @@ module TexCardBoard {
 
       this.scene = new THREE.Scene();
 
-      this.camera = new THREE.PerspectiveCamera(90, 1, 0.001, 700);
+      this.camera = new THREE.PerspectiveCamera(90, 1, 0.001, 1000);
       this.camera.position.set(0, 0, -10);
       this.camera.lookAt(new THREE.Vector3(0, 0, 0));
       this.scene.add(this.camera);
@@ -69,7 +69,7 @@ module TexCardBoard {
       this.mesh = new THREE.Mesh(geometry, material);
       this.mesh.rotation.x = -Math.PI;
       this.mesh.rotation.z = -Math.PI;
-      this.mesh.position.set(0, 0, 690);
+      this.mesh.position.set(0, 0, 990);
       //this.mesh.rotation.y +=  Math.PI / 3.0
       this.scene.add(this.mesh);
 
