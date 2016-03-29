@@ -19,7 +19,7 @@ var TexCardBoard;
             this.network = new TexCardBoard.Network(peerId);
             this.android = new TexCardBoard.AndroidDevice();
             this.android.on(TexCardBoard.AndroidDevice.OnDeviceOrientation, function (e) {
-                //this.network.append(e);
+                _this.network.append(e);
             });
             this.network.on(TexCardBoard.Network.onVideo, function (stream) {
                 var video = document.getElementById('video');

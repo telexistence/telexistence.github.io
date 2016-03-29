@@ -76,6 +76,11 @@ module TexCardBoard{
     }
 
     append(data: Orientation){
+      if(this.peerIo_) {
+        this.peerIo_.broadcast(JSON.stringify(data));
+      }
+
+      /*
       this.data.push(data);
       this.data = this.data.slice(1, this.data.length);
       this.sendData = new Orientation();
@@ -91,13 +96,14 @@ module TexCardBoard{
     //  this.sendData = data;
 
       if(this.peerIo_) {
-        this.peerIo_.broadcast(JSON.stringify(data));
+       this.peerIo_.broadcast(JSON.stringify(data));
       }
+      */
     }
 
     private transmit_ = ()=>{
       if(this.peerIo_) {
-        this.peerIo_.broadcast(JSON.stringify(this.sendData));
+        //this.peerIo_.broadcast(JSON.stringify(this.sendData));
       }
     };
   }
