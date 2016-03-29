@@ -27,8 +27,6 @@ module TexCardBoard{
           y = - y;
         }
 
-        document.getElementById('directions').innerHTML = x + "<br />" + y; // event.alphaで方角の値を取得
-
         message.alpha = x;
         message.gamma = y;
 

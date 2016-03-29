@@ -4,17 +4,51 @@
 
 module TexCardBoard{
   import JSONLoader = THREE.JSONLoader;
+  import OrbitControls = THREE.OrbitControls;
+
+  class OrientationManager{
+    private data: Orientation[];
+    constructor(){
+      data = [];
+      for(var i = 0; i < 4; i++){
+        var orientation = new Orientation();
+        orientation.alpha = 0;
+        orientation.gamma = 0;
+        data.push(orientation);
+      }
+    }
+
+    push(orientation: Orientation){
+      this.data = this.data.slice(1);
+      this.data.push(orientation);
+    }
+
+    private averageNum(a: number, b: number): number{
+      if(Math.abs(a - b) < 180) return (a + b) / 2;
+      else return (a + b + 360) / 2;
+    }
+
+    private averageOrientation(a: Orientation, b: Orientation){
+      var orientation = new Orientation();
+      orientation.alpha = this.averageNum(a.alpha, b.alpha);
+      orientation.gamma = this.averageNum(a.gamma, b.gamma);
+      return orientation;
+    }
+
+    average(): Orientation{
+      var fis = this.averageOrientation(orientation[0], orientation[1]);
+      var snd = this.averageOrientation(orientation[2], orientation[3]);
+      return this.averageOrientation(fis, snd);
+    }
+  }
 
   export class Network extends EventEmitter2{
     static onVideo = "onVideo-in-network.ts";
     private peerIo_;
-    private data: Orientation[];
-    private sendData: Orientation;
+    private orientationManager_ = new OrientationManager();
 
     constructor(prefix: string){
       super();
-      this.data = [];
-      for(var i = 0; i < 5; i++) this.data.push(new Orientation());
 
       navigator.getUserMedia = navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMedia;
       navigator.getUserMedia({
@@ -72,37 +106,16 @@ module TexCardBoard{
         this.emit(Network.onVideo, stream);
       });
 
-      //setInterval(this.transmit_, 100);
+      setInterval(this.transmit_, 100);
     }
 
     append(data: Orientation){
-      if(this.peerIo_) {
-        this.peerIo_.broadcast(JSON.stringify(data));
-        document.getElementById('directions').innerHTML = JSON.stringify(data); // event.alphaで方角の値を取得
-      }
-
-      /*
-      this.data.push(data);
-      this.data = this.data.slice(1, this.data.length);
-      this.sendData = new Orientation();
-      for(var i = 0; i < 5; i++){
-        this.sendData.alpha += this.data[i].alpha;
-        this.sendData.beta += this.data[i].beta;
-        this.sendData.gamma += this.data[i].gamma;
-      }
-
-      this.sendData.alpha /= 5.0;
-      this.sendData.beta /= 5.0;
-      this.sendData.gamma /= 5.0;
-    //  this.sendData = data;
-
-      if(this.peerIo_) {
-       this.peerIo_.broadcast(JSON.stringify(data));
-      }
-      */
+      this.orientationManager_.push(data);
     }
 
     private transmit_ = ()=>{
+      var orientation = this.orientationManager_.average();
+      document.getElementById('directions').innerHTML = orientation.alpha + "<br />" + orientation.gamma; // event.alphaで方角の値を取得
       if(this.peerIo_) {
         //this.peerIo_.broadcast(JSON.stringify(this.sendData));
       }

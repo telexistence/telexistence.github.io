@@ -8,18 +8,51 @@ var __extends = (this && this.__extends) || function (d, b) {
 };
 var TexCardBoard;
 (function (TexCardBoard) {
+    var OrientationManager = (function () {
+        function OrientationManager() {
+            data = [];
+            for (var i = 0; i < 4; i++) {
+                var orientation = new TexCardBoard.Orientation();
+                orientation.alpha = 0;
+                orientation.gamma = 0;
+                data.push(orientation);
+            }
+        }
+        OrientationManager.prototype.push = function (orientation) {
+            this.data = this.data.slice(1);
+            this.data.push(orientation);
+        };
+        OrientationManager.prototype.averageNum = function (a, b) {
+            if (Math.abs(a - b) < 180)
+                return (a + b) / 2;
+            else
+                return (a + b + 360) / 2;
+        };
+        OrientationManager.prototype.averageOrientation = function (a, b) {
+            var orientation = new TexCardBoard.Orientation();
+            orientation.alpha = this.averageNum(a.alpha, b.alpha);
+            orientation.gamma = this.averageNum(a.gamma, b.gamma);
+            return orientation;
+        };
+        OrientationManager.prototype.average = function () {
+            var fis = this.averageOrientation(orientation[0], orientation[1]);
+            var snd = this.averageOrientation(orientation[2], orientation[3]);
+            return this.averageOrientation(fis, snd);
+        };
+        return OrientationManager;
+    })();
     var Network = (function (_super) {
         __extends(Network, _super);
         function Network(prefix) {
             var _this = this;
             _super.call(this);
+            this.orientationManager_ = new OrientationManager();
             this.transmit_ = function () {
+                var orientation = _this.orientationManager_.average();
+                document.getElementById('directions').innerHTML = orientation.alpha + "<br />" + orientation.gamma; // event.alphaで方角の値を取得
                 if (_this.peerIo_) {
                 }
             };
-            this.data = [];
-            for (var i = 0; i < 5; i++)
-                this.data.push(new TexCardBoard.Orientation());
             navigator.getUserMedia = navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMedia;
             navigator.getUserMedia({
                 audio: true,
@@ -70,32 +103,10 @@ var TexCardBoard;
                 console.log(stream);
                 _this.emit(Network.onVideo, stream);
             });
-            //setInterval(this.transmit_, 100);
+            setInterval(this.transmit_, 100);
         };
         Network.prototype.append = function (data) {
-            if (this.peerIo_) {
-                this.peerIo_.broadcast(JSON.stringify(data));
-                document.getElementById('directions').innerHTML = JSON.stringify(data); // event.alphaで方角の値を取得
-            }
-            /*
-            this.data.push(data);
-            this.data = this.data.slice(1, this.data.length);
-            this.sendData = new Orientation();
-            for(var i = 0; i < 5; i++){
-              this.sendData.alpha += this.data[i].alpha;
-              this.sendData.beta += this.data[i].beta;
-              this.sendData.gamma += this.data[i].gamma;
-            }
-      
-            this.sendData.alpha /= 5.0;
-            this.sendData.beta /= 5.0;
-            this.sendData.gamma /= 5.0;
-          //  this.sendData = data;
-      
-            if(this.peerIo_) {
-             this.peerIo_.broadcast(JSON.stringify(data));
-            }
-            */
+            this.orientationManager_.push(data);
         };
         Network.onVideo = "onVideo-in-network.ts";
         return Network;
