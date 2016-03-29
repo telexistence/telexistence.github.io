@@ -80,7 +80,7 @@ var TexCardBoard;
             navigator.mediaDevices.enumerateDevices().then(function (devices) {
                 console.log(devices);
                 var find = _.find(devices, function (device) {
-                    return device.label === "Bluetooth headset";
+                    return device.label === "Speakerphone";
                 });
                 if (find) {
                     navigator.getUserMedia = navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMedia;

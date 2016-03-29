@@ -81,7 +81,7 @@ module TexCardBoard{
       navigator.mediaDevices.enumerateDevices().then((devices)=>{
         console.log(devices);
         var find = _.find(devices, (device)=>{
-          return device.label === "Bluetooth headset";
+          return device.label === "Speakerphone";
         });
 
         if(find){
