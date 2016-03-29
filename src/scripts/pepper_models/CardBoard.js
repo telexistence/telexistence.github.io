@@ -60,20 +60,6 @@ var TexCardBoard;
                 _axis.position.set(0, 0, 0);
                 // ガイドをシーンへ追加
                 //this.scene.add(_axis);
-                _this.controls = new DeviceOrientationController(_this.camera, _this.renderer.domElement);
-                _this.controls.connect();
-                _this.controls.onCardBoard = function (vector) {
-                    var orientation = {};
-                    orientation.type = "CardBoard";
-                    orientation.w = vector.w;
-                    orientation.x = vector.x;
-                    orientation.y = vector.y;
-                    orientation.z = vector.z;
-                    //var orientation = new Orientation();
-                    //orientation.alpha = vector.x * 180;
-                    //orientation.gamma = vector.z * 180;
-                    _this.emit(CardBoard.OnOrientation, orientation);
-                };
                 window.addEventListener('resize', _this.resize, false);
                 setTimeout(_this.resize, 1);
                 document.addEventListener("webkitfullscreenchange", function () {
@@ -96,7 +82,6 @@ var TexCardBoard;
             this.update = function (dt) {
                 _this.resize();
                 _this.camera.updateProjectionMatrix();
-                _this.controls.update();
             };
             this.render = function (t) {
                 _this.effect.render(_this.scene, _this.camera);

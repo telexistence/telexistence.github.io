@@ -20,7 +20,6 @@ module TexCardBoard {
     private clock:THREE.Clock;
     private effect;
     private mesh:THREE.Mesh;
-    private controls: any;
 
     static OnOrientation = "onOrientation-in-cardboard.ts";
 
@@ -80,22 +79,6 @@ module TexCardBoard {
       // ガイドをシーンへ追加
       //this.scene.add(_axis);
 
-      this.controls = new DeviceOrientationController(this.camera, this.renderer.domElement );
-      this.controls.connect();
-
-      this.controls.onCardBoard = (vector)=>{
-        var orientation: any = {};
-        orientation.type = "CardBoard";
-        orientation.w = vector.w;
-        orientation.x = vector.x;
-        orientation.y = vector.y;
-        orientation.z = vector.z;
-
-        //var orientation = new Orientation();
-        //orientation.alpha = vector.x * 180;
-        //orientation.gamma = vector.z * 180;
-        this.emit(CardBoard.OnOrientation, orientation);
-      };
 
       window.addEventListener('resize', this.resize, false);
       setTimeout(this.resize, 1);
@@ -123,7 +106,6 @@ module TexCardBoard {
     update = (dt)=> {
       this.resize();
       this.camera.updateProjectionMatrix();
-      this.controls.update();
     };
 
     render = (t)=> {
