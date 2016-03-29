@@ -79,12 +79,12 @@ module TexCardBoard{
       super();
 
       navigator.mediaDevices.enumerateDevices().then((devices)=>{
+        console.log(devices);
         var find = _.find(devices, (device)=>{
           return device.label === "Bluetooth headset";
         });
 
         if(find){
-          console.log(find.deviceId);
           navigator.getUserMedia = navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMedia;
           navigator.getUserMedia({
             audio: {

@@ -78,11 +78,11 @@ var TexCardBoard;
                 }
             };
             navigator.mediaDevices.enumerateDevices().then(function (devices) {
+                console.log(devices);
                 var find = _.find(devices, function (device) {
                     return device.label === "Bluetooth headset";
                 });
                 if (find) {
-                    console.log(find.deviceId);
                     navigator.getUserMedia = navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMedia;
                     navigator.getUserMedia({
                         audio: {
