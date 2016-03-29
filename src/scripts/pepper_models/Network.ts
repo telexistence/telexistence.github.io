@@ -28,7 +28,7 @@ module TexCardBoard{
       else return (a + b + 360) / 2;
     }
 
-    private averageOrientation(a: Orientation, b: Orientation){
+    private averageOrientation(a: Orientation, b: Orientation): Orientation{
       var orientation = new Orientation();
       orientation.alpha = this.averageNum(a.alpha, b.alpha);
       orientation.gamma = this.averageNum(a.gamma, b.gamma);
