@@ -38,6 +38,8 @@ var TexCardBoard;
                 document.getElementById('directions').innerHTML = x + "<br />" + y; // event.alphaで方角の値を取得
                 message.alpha = x;
                 message.gamma = y;
+                document.getElementById('directions').innerHTML =
+                    message.alpha + "<br />" + message.gamma; // event.alphaで方角の値を取得
                 _this.emit(AndroidDevice.OnDeviceOrientation, message);
             };
             window.addEventListener('deviceorientation', setOrientationControls, true);

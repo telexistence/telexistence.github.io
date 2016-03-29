@@ -48,8 +48,7 @@ module TexCardBoard{
       var snd = this.averageOrientation(this.data[2], this.data[3]);
       var avg = this.averageOrientation(fis, snd);
 
-      document.getElementById('directions').innerHTML =
-          orientation.alpha + "<br />" + orientation.gamma; // event.alphaで方角の値を取得
+
 
       avg.alpha = (avg.alpha - this.offset_ + 360) % 360;
       avg.alpha -= 180;
