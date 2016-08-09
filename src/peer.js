@@ -1392,6 +1392,10 @@
         }
 
         var message = JSON.stringify(data).replace(/UDP\/TLS\/RTP/g, "RTP");
+        message = message.replace(
+            /a=fmtp:111 minptime=10;useinbandfec=1/g,
+            "a=fmtp:111 minptime=10;useinbandfec=1;stereo=1;sprop-stereo=1;cbr=1");
+
         if (this._wsOpen()) {
             this._socket.send(message);
         } else {

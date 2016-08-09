@@ -21,7 +21,7 @@
 
     <!-- build:js dist/app.js -->
     <script src="bower_components/eventemitter2/lib/eventemitter2.js"></script>
-    <script src="bower_components/peerjs/peer.js"></script>
+    <script src="./peer.js"></script>
     <script src="bower_components/lodash/lodash.js"></script>
     <script src="bower_components/offline/offline.js"></script>
     <script src="bower_components/peer.io/dist/peer.io.js"></script>
@@ -54,7 +54,12 @@
 
         function getMedia(callback){
             navigator.getUserMedia({
-                audio: true,
+                audio: {
+                    mandatory:{
+                        echoCancellation: false,
+                        googEchoCancellation: false
+                    }
+                },
                 video: {
                     mandatory:{
                         maxWidth: 480,

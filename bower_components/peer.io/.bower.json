@@ -1,0 +1,44 @@
+{
+  "name": "peer.io",
+  "description": "",
+  "version": "0.1.4",
+  "main": "dist/peer.io.js",
+  "authors": [
+    "Toshiya Nakakura <nakakura@me.com>"
+  ],
+  "license": "MIT",
+  "keywords": [
+    "PeerJs",
+    "SkyWay",
+    "WebRTC"
+  ],
+  "homepage": "https://github.com/nakakura/peer.io",
+  "moduleType": [],
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests",
+    "gulpfile.js",
+    "karma.conf.js",
+    "package.json",
+    "src"
+  ],
+  "dependencies": {
+    "eventemitter2": "~0.4.14",
+    "peerjs": "~0.3.14",
+    "lodash": "~3.10.1",
+    "offline": "~0.7.14"
+  },
+  "_release": "0.1.4",
+  "_resolution": {
+    "type": "version",
+    "tag": "0.1.4",
+    "commit": "fb40f8cc4b89720ec079584761a0d8bb80ab203a"
+  },
+  "_source": "https://github.com/nakakura/peer.io.git",
+  "_target": "~0.1.4",
+  "_originalSource": "peer.io"
+}

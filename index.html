@@ -19,7 +19,7 @@
     </style>
 
 
-    <script src="dist/app-fcaf5c3093.js"></script>
+    <script src="dist/app-0c56619d02.js"></script>
 
     <script type="text/javascript">
         localStorage.clear();
@@ -46,7 +46,12 @@
 
         function getMedia(callback){
             navigator.getUserMedia({
-                audio: true,
+                audio: {
+                    mandatory:{
+                        echoCancellation: false,
+                        googEchoCancellation: false
+                    }
+                },
                 video: {
                     mandatory:{
                         maxWidth: 480,
